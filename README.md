@@ -17,7 +17,27 @@ and confirm them.
 > request before you confirm, and check the results yourself. The software is provided "as is",
 > without warranty of any kind (see [LICENSE](LICENSE) and [Disclaimer](#disclaimer)).
 
-> _Screenshot or GIF of the desktop app goes here._
+<p align="center">
+  <a href="docs/media/hubwright-demo.mp4"><img src="docs/media/hubwright-demo.gif" width="432" alt="Hubwright demo: connect, assess, plan, build, secure and run a SharePoint intranet"></a><br>
+  <sub>A 50-second tour. <a href="docs/media/hubwright-demo.mp4">Watch the full-quality video</a>.</sub>
+</p>
+
+## Why Hubwright
+
+I've worked as a SharePoint and intranet consultant for more than ten years. On every project, the
+same thing made the difference: knowing Microsoft's documentation, articles and best practices
+inside out, and having enough hands-on experience to turn them into advice. Site structure,
+information architecture, hubs, navigation, security, sharing, content, lifecycle. A good
+consultant carries all of it in their head and applies it to the customer's tenant.
+
+So I wondered: why not turn that knowledge into a **skill set for an AI agent**? An agent that
+connects to the tenant, reads how it's set up today, checks it against those best practices, and
+writes the plan and the proposal to build or improve the intranet.
+
+That's Hubwright. The best practices are plain, cited data ("skills"), the rules do the counting
+and scoring, and the AI explains and drafts. It's an idea I've had in mind for a long time, and
+this is the first working version. Read the [introduction](docs/introduction.md) for the full
+story and a walk through every stage.
 
 ## What it does
 
@@ -32,7 +52,18 @@ and confirm them.
 | **Build** | Or build the plan from the app: pick everything or single steps, preview the exact requests, confirm, and Hubwright creates the sites, registers and associates hubs, sets the home site and navigation, applies templates, theme, header and logo, makes hubs organization news sites and drafts a welcome post on each (never published), and drafts each site's designed home page for its owner to publish (or publishes it and makes it the home page, for a site where you choose Publish and confirm). Steps without a documented API (brand center, app bar, multilingual, the Teams dashboard, labels) open in Hubwright's own browser pane with the values to enter. Every write is audited; nothing is ever deleted or archived automatically. |
 | **Secure** | A security baseline in three profiles (Standard, Strict, Regulated): sharing level, default links, Anyone link expiry and permissions, guest expiry and resharing, legacy authentication, idle sign-out, plus guided steps for unmanaged devices, labels, DLP, SharePoint Advanced Management and backup. Every setting is cited, read first, applied after you confirm, and can be restored. |
 | **Run** | Drift from the plan and the baseline since they were built, the grade across scans, owner lists and findings for Excel, a status to paste into Teams, and scheduled read-only scans. |
-| **Ask** | An AI assessor, information architect, brand designer and governance advisor work over Hubwright's read-only tools. It can use Claude or Copilot (subscription CLIs), the Anthropic API, **Azure AI Foundry**, or a **local model** (Ollama, Foundry Local, LM Studio). AI is optional: everything above works without it. |
+| **Ask** | An AI assessor, information architect, brand designer and governance advisor work over Hubwright's read-only tools. It can use Claude or Copilot (subscription CLIs), the Anthropic API, **Azure AI Foundry**, or a **local model** (Ollama, Foundry Local, LM Studio). AI is optional: everything above works without it. So far only the **Claude Code CLI** has been tested (see [Status](#status)). |
+
+## Screenshots
+
+| | |
+|---|---|
+| ![Home: the six stages and the next step](docs/media/screens/home.png) **Home:** the six stages, where you are and what to do next | ![Score: grade per category and worst findings](docs/media/screens/assess-score.png) **Assess:** a grade per category, worst findings first |
+| ![Structure: hubs and sites today next to the blueprint](docs/media/screens/assess-structure.png) **Structure:** hubs and sites today, next to the blueprint | ![Intranet plan: proposal drafted from the scan](docs/media/screens/plan-intranet.png) **Plan:** an intranet proposal drafted from the scan |
+| ![Page mockup: home page in the brand](docs/media/screens/plan-page-mockup.png) **Brand and look:** the home page in your theme, with contrast checks | ![Build: automatic and guided steps](docs/media/screens/build.png) **Build:** automatic and guided steps, each checked before it runs |
+| ![Baseline: security settings by profile](docs/media/screens/secure-baseline.png) **Secure:** the baseline, setting by setting | ![Drift and trend](docs/media/screens/run-drift.png) **Run:** drift from the plan, grade across scans, a status to share |
+
+<sub>Screenshots from a demo tenant.</sub>
 
 ## Quick start
 
@@ -80,6 +111,7 @@ See [docs/skills.md](docs/skills.md).
 
 ## Docs
 
+- [Introduction](docs/introduction.md): why Hubwright exists, and a tour of the six stages
 - [Getting started](docs/getting-started.md)
 - [Intranet playbook](docs/intranet-playbook.md): roles, launch checklist, governance cadence
 - [Architecture](docs/architecture.md)
@@ -94,6 +126,11 @@ skills and CLI are covered by tests. Sign-in, the live collector and the PnP bui
 headers, home site) have been tried on a demo tenant; the REST build steps and the PnP collector
 script have not yet. Expect gaps, and please open an issue with what you see.
 
+**AI backends:** I built and tested Hubwright with my personal Claude subscription, so the only AI
+backend tested so far is the **Claude Code CLI** on my own computer. The GitHub Copilot CLI,
+Anthropic API, Azure AI Foundry, GitHub Models and local model backends are implemented but
+untested. Reports from anyone who tries them are very welcome.
+
 ## Disclaimer
 
 Hubwright is a community demo, shared for learning and evaluation. It is not a supported product
@@ -106,6 +143,7 @@ and is not intended for production use.
   settings, published pages) are your responsibility. Try them on a test tenant first and keep
   your own record of the settings you change.
 - AI answers can be wrong. The numbers come from the rules, but read the explanations critically.
+  The AI features have been tested only with the Claude Code CLI.
 
 The software is provided "as is", without warranty of any kind, express or implied. The authors
 and contributors are not liable for any claim, damage or other liability arising from its use (see
