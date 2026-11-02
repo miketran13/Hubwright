@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Hubwright's logo: an H whose crossbar is a hub. Hubwright.ico is rendered from this geometry. -->
+  <defs>
+    <linearGradient id="tile" x1="16" y1="16" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2B8CE0"/>
+      <stop offset="1" stop-color="#0B6E86"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="url(#tile)"/>
+  <g fill="#FFFFFF">
+    <rect x="66" y="64" width="36" height="128" rx="18"/>
+    <rect x="154" y="64" width="36" height="128" rx="18"/>
+    <rect x="90" y="113" width="76" height="30"/>
+    <circle cx="128" cy="128" r="28"/>
+  </g>
+  <circle cx="128" cy="128" r="13" fill="#1A7CB8"/>
+</svg>

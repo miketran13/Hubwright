@@ -1,0 +1,36 @@
+hints:
+  - id: site-design
+    title: "Design each site for its purpose"
+    what: "A design for each site: what it is for, the pattern it follows, the home page sections, its own navigation and who reads and edits it."
+    why: "People come to a site to do something. A home page built around those tasks (an HR site leads with benefits, pay and leave) is found and used; a generic page is not. The design is Hubwright's starting point from the site-design skill's patterns, for you or an agent to change."
+    how:
+      - "Plan → Site designs: pick a site, read why it got its pattern, and look at the preview (sample content, Hubwright's wireframe)."
+      - "Change the pattern, or ask the AI to redesign it; an AI change waits in AI suggestions until you accept it."
+      - "Tick Include in build for the sites whose page you want drafted."
+    example: "\"HR – Benefits\" → HR services: quick links (Benefits, Pay, Leave), FAQ, contacts, policies."
+  - id: design-page
+    title: "Draft the designed home page"
+    what: "A new, unpublished page called Proposed-home on the site, with the design's sections as web parts and placeholder text."
+    why: "The owner sees the design on their own site, with their own content, before anyone else does. Nothing that exists is changed: the current home page stays the home page until the owner switches it."
+    how:
+      - "Hubwright runs Add-PnPPage (no -Publish), Add-PnPPageSection, Add-PnPPageWebPart and Add-PnPPageTextPart."
+      - "If a page called Proposed-home already exists, it is left as it is."
+      - "By hand: New → Page → Blank, add the sections and web parts in the step, then Save as draft."
+    example: "Add-PnPPage -Name 'Proposed-home' -LayoutType Home"
+    source: https://pnp.github.io/powershell/cmdlets/Add-PnPPage.html
+    quote: "Publishes the page once it is saved."
+    reviewed: 2026-10-31
+  - id: publish-design
+    title: "Review, publish and switch the home page"
+    what: "The site owner finishes the drafted page, publishes it and makes it the site's home page; or, when you choose Publish and confirm, Hubwright does it and records the previous home page."
+    why: "Switching a home page changes what everyone who visits the site sees, so the owner decides when, and tells the site's members first. Microsoft only lets a site owner do it, and only with a published page."
+    how:
+      - "Open the Proposed-home page, configure each web part and replace every placeholder."
+      - "Add the planned navigation links once their pages exist."
+      - "Publish, then Settings → Site contents → Site pages → select Proposed-home → … → Make homepage."
+      - "Or Site designs → Publish and make home page: Hubwright reads the current home page, records it, then runs Set-PnPPage -Publish and Set-PnPHomePage."
+      - "The old home page stays in Site pages; make it the home page again to go back."
+    example: "On HR – Benefits: publish Proposed-home on Monday after telling the HR team, then Make homepage."
+    source: https://support.microsoft.com/en-us/office/use-a-different-page-for-your-sharepoint-site-home-page-35a5022c-f84a-455d-985e-c691ab5dfa17
+    quote: "You must be the site owner to set a different page as a homepage."
+    reviewed: 2026-10-31

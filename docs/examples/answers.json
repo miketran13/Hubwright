@@ -1,0 +1,13 @@
+{
+  "organization": "Contoso",
+  "tenantPrefix": "contoso",
+  "employees": 2500,
+  "departments": ["HR", "IT", "Finance", "Legal", "Communications", "Sales"],
+  "regions": ["Seattle", "London", "Singapore"],
+  "languages": ["en-US", "fr-FR"],
+  "goals": ["news", "policies", "onboarding", "collaboration", "copilot"],
+  "externalCollaboration": true,
+  "allowAnyoneLinks": false,
+  "brandColor": "#e3008c",
+  "headerLayout": "extended"
+}

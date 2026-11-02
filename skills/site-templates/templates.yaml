@@ -1,0 +1,778 @@
+# Ready-made sites: Microsoft's built-in site templates and the look book PnP packages.
+# Descriptions and quotes are verbatim from the source pages; `hubwright skills refresh` re-checks the quotes.
+# Look book packages have no description on Microsoft's page; theirs say what kind of package they are.
+# sections are Hubwright's wireframe of the home page for previews, not Microsoft's exact layout.
+templates:
+  - id: standard-communication
+    name: "Standard communication"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Engage viewers with informative content like news, announcements, and events."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Engage viewers with informative content like news, announcements, and events."
+    reviewed: 2026-10-28
+    suggestFor: ["news", "announcements", "newsroom", "communications"]
+    sections: ["hero", "news", "events", "quicklinks"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    siteDesignId: 96c933ac-3698-44c7-9f4a-5fd17d71af9e
+    pnpTemplate: StandardCommunication
+    prerequisites: ["Site owner"]
+  - id: brand-central
+    name: "Brand central"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide a centralized location for brand assets and guidelines."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide a centralized location for brand assets and guidelines."
+    reviewed: 2026-10-28
+    suggestFor: ["brand", "branding", "brand assets", "logo", "logos", "guidelines"]
+    sections: ["hero", "documents", "gallery", "quicklinks"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: BrandCentral
+    prerequisites: ["Site owner"]
+  - id: crisis-management
+    name: "Crisis management"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Share news, provide support, and connect people to resources during a crisis."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Share news, provide support, and connect people to resources during a crisis."
+    reviewed: 2026-10-28
+    suggestFor: ["crisis", "emergency", "business continuity", "incident"]
+    sections: ["hero", "news", "quicklinks", "faq"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: CrisisManagement
+    prerequisites: ["Site owner"]
+  - id: department
+    name: "Department"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Engage and connect viewers with departmental news, highlight upcoming events, and provide easy access to frequently accessed files."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Engage and connect viewers with departmental news"
+    reviewed: 2026-10-28
+    suggestFor: ["department", "departments", "family of sites", "function", "office", "location", "locations", "services"]
+    sections: ["hero", "news", "events", "documents", "quicklinks"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: Department
+    prerequisites: ["Site owner"]
+  - id: event
+    name: "Event"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide attendees information on attending speakers, session schedule, registration, and answers to frequently asked questions."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide attendees information on attending speakers, session schedule, registration"
+    reviewed: 2026-10-28
+    suggestFor: ["event", "conference", "summit", "speakers", "registration"]
+    sections: ["hero", "text", "calendar", "people", "faq"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: Event
+    prerequisites: ["Site owner"]
+  - id: human-resources
+    name: "Human resources"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide employees access to information regarding their benefits, career, compensation, and organization policies."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide employees access to information regarding their benefits, career, compensation, and organization policies."
+    reviewed: 2026-10-28
+    suggestFor: ["hr", "human resources", "benefits", "compensation", "pay", "career", "careers", "talent", "policies"]
+    sections: ["hero", "news", "quicklinks", "documents", "faq"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: HumanResources
+    prerequisites: ["Site owner"]
+  - id: leadership-connection
+    name: "Leadership connection"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Build organizational culture by connecting leadership and team members through engaging in conversation, news, and events."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Build organizational culture by connecting leadership and team members through engaging in conversation, news, and events."
+    reviewed: 2026-10-28
+    suggestFor: ["leadership", "leaders", "executive", "executives", "ceo", "culture"]
+    sections: ["hero", "news", "video", "events", "conversations"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: LeadershipConnection
+    prerequisites: ["Site owner"]
+  - id: learning-central
+    name: "Learning central"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide an internal landing experience for your organization that serves as the single place where events, news, and extra-curricular resources are showcased."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide an internal landing experience for your organization that serves as the single place"
+    reviewed: 2026-10-28
+    suggestFor: ["learning", "academy", "training", "education", "courses"]
+    sections: ["hero", "news", "events", "quicklinks"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: LearningCentral
+    prerequisites: ["Site owner"]
+  - id: new-employee-onboarding
+    name: "New employee onboarding"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Streamline and refine new hire onboarding by engaging and guiding new employees through your onboarding process."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Streamline and refine new hire onboarding by engaging and guiding new employees through your onboarding process."
+    reviewed: 2026-10-28
+    suggestFor: ["onboarding", "new starters", "new hire", "new hires", "new employee", "new employees", "first week"]
+    sections: ["hero", "text", "quicklinks", "people", "faq"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: NewEmployeeOnboarding
+    prerequisites: ["Site owner"]
+  - id: organization-home
+    name: "Organization home"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide the online home for your organization with news, resources, and personalized content."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide the online home for your organization with news, resources, and personalized content."
+    reviewed: 2026-10-28
+    suggestFor: ["home", "front door", "intranet", "company news", "organization home"]
+    sections: ["hero", "news", "quicklinks", "events", "conversations"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: OrganizationHome
+    prerequisites: ["Site owner"]
+  - id: showcase
+    name: "Showcase"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Spotlight a product, event, or team using visual content like images and video."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Spotlight a product, event, or team using visual content like images and video."
+    reviewed: 2026-10-28
+    suggestFor: ["showcase", "spotlight", "product", "launch", "gallery", "customer stories", "stories"]
+    sections: ["hero", "gallery", "video", "text"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    siteDesignId: 6142d2a0-63a5-4ba0-aede-d9fefca2c767
+    pnpTemplate: Showcase
+    prerequisites: ["Site owner"]
+  - id: volunteer-center
+    name: "Volunteer center"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Provide a central hub for volunteers in your nonprofit organization to engage and access key information and resources for training, onboarding, upcoming events, and more."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Provide a central hub for volunteers in your nonprofit organization to engage and access key information"
+    reviewed: 2026-10-28
+    suggestFor: ["volunteer", "volunteers", "nonprofit", "charity"]
+    sections: ["hero", "news", "events", "quicklinks"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    pnpTemplate: VolunteerCenter
+    prerequisites: ["Site owner"]
+  - id: blank
+    name: "Blank"
+    source: microsoft
+    kind: communication
+    category: communication
+    description: "Create your own custom site starting with a blank home page."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Create your own custom site starting with a blank home page."
+    reviewed: 2026-10-28
+    suggestFor: ["blank", "custom"]
+    sections: ["text"]
+    webTemplate: "SITEPAGEPUBLISHING#0"
+    siteDesignId: f6cc5403-0d63-442e-96c0-285923709ffc
+    pnpTemplate: Blank
+    prerequisites: ["Site owner"]
+  - id: standard-team
+    name: "Standard team"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Manage projects, share content, and stay connected with your team."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Manage projects, share content, and stay connected with your team."
+    reviewed: 2026-10-28
+    suggestFor: ["team", "workspace", "collaboration", "extranet", "partner", "partners"]
+    sections: ["news", "documents", "conversations", "quicklinks"]
+    webTemplate: "STS#3"
+    pnpTemplate: StandardTeam
+    prerequisites: ["Site owner"]
+  - id: crisis-communication-team
+    name: "Crisis communication team"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Centralize crisis communication, resources, and best practices."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Centralize crisis communication, resources, and best practices."
+    reviewed: 2026-10-28
+    suggestFor: ["crisis team", "crisis communication", "incident response"]
+    sections: ["news", "documents", "quicklinks"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: CrisisCommunicationTeam
+    prerequisites: ["Site owner"]
+  - id: employee-onboarding-team
+    name: "Employee onboarding team"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Guide new employees through your team's onboarding process."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Guide new employees through your team's onboarding process."
+    reviewed: 2026-10-28
+    suggestFor: ["onboarding team", "team onboarding", "onboarding"]
+    sections: ["text", "quicklinks", "documents", "people"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: EmployeeOnboardingTeam
+    prerequisites: ["Site owner"]
+  - id: event-planning
+    name: "Event planning"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Coordinate and plan event details with your team. Use ready-made event recap and event status news post templates to quickly get your team up to date."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Coordinate and plan event details with your team."
+    reviewed: 2026-10-28
+    suggestFor: ["event planning", "events team", "planning", "event"]
+    sections: ["news", "calendar", "tasks", "documents"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: EventPlanning
+    prerequisites: ["Site owner"]
+  - id: it-help-desk
+    name: "IT help desk"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Manage technical requests, track devices, and share training materials."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Manage technical requests, track devices, and share training materials."
+    reviewed: 2026-10-28
+    suggestFor: ["it", "help desk", "service desk", "helpdesk", "devices", "support", "tickets"]
+    sections: ["quicklinks", "tasks", "documents", "news"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: ITHelpDesk
+    prerequisites: ["Site owner"]
+  - id: project-management
+    name: "Project management"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Create a collaboration space for your team where you can access frequent tools, share project updates, post meeting notes, and upload team documents."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Create a collaboration space for your team where you can access frequent tools"
+    reviewed: 2026-10-28
+    suggestFor: ["project", "projects", "programme", "program", "pmo"]
+    sections: ["quicklinks", "news", "tasks", "documents", "calendar"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: ProjectManagement
+    prerequisites: ["Site owner"]
+  - id: retail-management-team
+    name: "Retail management team"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Unite retail managers, keep them informed, and provide access to popular resources."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Unite retail managers, keep them informed, and provide access to popular resources."
+    reviewed: 2026-10-28
+    suggestFor: ["retail managers", "retail management", "store managers"]
+    sections: ["news", "quicklinks", "documents"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: RetailManagement
+    prerequisites: ["Site owner"]
+  - id: store-collaboration
+    name: "Store collaboration"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Coordinate and prepare retail teams by sharing store news, resources, and training."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Coordinate and prepare retail teams by sharing store news, resources, and training."
+    reviewed: 2026-10-28
+    suggestFor: ["store", "stores", "shop", "shops", "retail"]
+    sections: ["news", "quicklinks", "documents", "calendar"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: StoreCollaboration
+    prerequisites: ["Site owner"]
+  - id: training-course
+    name: "Training course"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Prepare course participants and students for specific learning opportunities by sharing course resources, news, and events."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Prepare course participants and students for specific learning opportunities by sharing course resources, news, and events."
+    reviewed: 2026-10-28
+    suggestFor: ["course", "courses", "class", "students", "participants"]
+    sections: ["news", "events", "documents", "quicklinks"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: TrainingAndCourses
+    prerequisites: ["Site owner"]
+  - id: training-design-team
+    name: "Training design team"
+    source: microsoft
+    kind: teamGroup
+    category: team
+    description: "Brainstorm and plan opportunities to help others learn and grow."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Brainstorm and plan opportunities to help others learn and grow."
+    reviewed: 2026-10-28
+    suggestFor: ["training design", "instructional design", "learning design", "learning team"]
+    sections: ["news", "tasks", "documents"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: TrainingAndDevelopmentTeam
+    prerequisites: ["Site owner"]
+  - id: accounts-payable-syntex
+    name: "Accounts Payable powered by Microsoft Syntex"
+    source: microsoft
+    kind: teamGroup
+    category: syntex
+    description: "Manage, process, and track purchase orders, invoices, and related files. Comes with a prebuilt tutorial to help with using Microsoft Syntex."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Manage, process, and track purchase orders, invoices, and related files."
+    reviewed: 2026-10-28
+    suggestFor: ["accounts payable", "invoices", "invoice", "purchase orders", "payables"]
+    sections: ["documents", "tasks", "quicklinks"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: AccountsPayable
+    prerequisites: ["Site owner", "Microsoft Syntex"]
+  - id: contracts-management-syntex
+    name: "Contracts Management powered by Microsoft Syntex"
+    source: microsoft
+    kind: teamGroup
+    category: syntex
+    description: "Prepopulated and preformatted template for contracts management teams with a prebuilt tutorial to help with using Microsoft Syntex."
+    url: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "Prepopulated and preformatted template for contracts management teams"
+    reviewed: 2026-10-28
+    suggestFor: ["contracts", "contract", "contract management", "contracts management"]
+    sections: ["documents", "tasks", "quicklinks"]
+    webTemplate: "GROUP#0"
+    pnpTemplate: ContractsManagement
+    prerequisites: ["Site owner", "Microsoft Syntex"]
+  - id: lookbook-leadership-connection
+    name: "Leadership Connection"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Leadership Connection"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/leadershipconnection/leadershipconnection.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["leadership", "executive", "ceo"]
+    sections: ["hero", "news", "video", "events"]
+  - id: lookbook-the-perspective
+    name: "The Perspective"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "The Perspective"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/theperspective/theperspective.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["perspective", "stories", "magazine", "newsroom"]
+    sections: ["hero", "news", "gallery"]
+  - id: lookbook-crisis-communications
+    name: "Crisis Communications"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Crisis Communications"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/crisis-mgmt/crisis-mgmt.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["crisis", "emergency", "business continuity"]
+    sections: ["hero", "news", "faq", "quicklinks"]
+  - id: lookbook-news-site
+    name: "News site"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "News site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/contosonews/contosonews.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["news", "newsroom", "announcements"]
+    sections: ["hero", "news", "news", "events"]
+  - id: lookbook-the-landing
+    name: "The Landing"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "The Landing"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/thelanding/thelanding.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["home", "front door", "intranet", "landing", "company news"]
+    sections: ["hero", "news", "quicklinks", "events", "people"]
+  - id: lookbook-benefits
+    name: "Benefits"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Benefits"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/benefits/benefits.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["benefits", "perks", "wellbeing"]
+    sections: ["hero", "quicklinks", "faq", "documents"]
+  - id: lookbook-lgbtq-employee-resource-group
+    name: "LGBTQ+ Employee Resource Group"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "LGBTQ+ Employee Resource Group"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/pride/pride.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["lgbtq", "pride", "employee resource group", "erg", "diversity", "inclusion"]
+    sections: ["hero", "news", "events", "people"]
+  - id: lookbook-hispanic-heritage-month-employee-resource-group
+    name: "Hispanic Heritage Month Employee Resource Group"
+    source: pnpPackage
+    kind: communication
+    category: "Organization"
+    description: "Look book template (Organization): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Hispanic Heritage Month Employee Resource Group"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/hispanicheritage/template.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["hispanic", "heritage", "employee resource group", "erg"]
+    sections: ["hero", "news", "events", "gallery"]
+  - id: lookbook-retail-operations
+    name: "Retail Operations"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Retail Operations"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/retailoperations/retailoperations.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["retail operations", "retail", "operations"]
+    sections: ["hero", "news", "quicklinks", "documents"]
+  - id: lookbook-fly-safe-conference
+    name: "Fly Safe Conference"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Fly Safe Conference"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/flysafeconference/flysafeconference.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["conference", "summit", "speakers"]
+    sections: ["hero", "calendar", "people", "faq"]
+  - id: lookbook-global-sales-hub
+    name: "Global sales hub"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Global sales hub"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/globalsales/globalsales.pnp
+    parameters: ["SiteTitle", "SiteUrl", "RetailOperationsSiteTitle", "RetailOperationsSiteUrl", "ConsumerRetailSiteTitle", "ConsumerRetailSiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["sales hub", "global sales"]
+    sections: ["hero", "news", "quicklinks", "documents"]
+  - id: lookbook-workshop-training-site
+    name: "Workshop training site"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Workshop training site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/droneproducttraining/droneproducttraining.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["workshop", "product training"]
+    sections: ["hero", "video", "documents"]
+  - id: lookbook-global-marketing-hub
+    name: "Global marketing hub"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Global marketing hub"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/globalmarketing/globalmarketing.pnp
+    parameters: ["SiteTitle", "SiteUrl", "CommunicationSiteTitle", "CommunicationSiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["marketing hub", "global marketing"]
+    sections: ["hero", "news", "gallery", "quicklinks"]
+  - id: lookbook-human-resources-hub
+    name: "Human resources hub"
+    source: pnpPackage
+    kind: communication
+    category: "Department"
+    description: "Look book template (Department): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Human resources hub"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/contosoworks/contosoworks.pnp
+    parameters: ["SiteTitle", "SiteUrl", "BenefitsSiteTitle", "BenefitsSiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["hr hub", "human resources hub"]
+    sections: ["hero", "news", "quicklinks", "faq"]
+  - id: lookbook-collaboration-team-site
+    name: "Collaboration team site"
+    source: pnpPackage
+    kind: teamGroup
+    category: "Team"
+    description: "Look book template (Team): a ready-made modern team site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Collaboration team site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/ContosoTeamSite/ContosoTeamSite.pnp
+    parameters: ["SiteTitle", "SiteAlias"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["team", "collaboration"]
+    sections: ["news", "documents", "conversations"]
+  - id: lookbook-team-communication-site
+    name: "Team communication site"
+    source: pnpPackage
+    kind: communication
+    category: "Team"
+    description: "Look book template (Team): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Team communication site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/communications/communications.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["team news", "team communication"]
+    sections: ["hero", "news", "people"]
+  - id: lookbook-mark8-project-team
+    name: "Mark8 Project Team"
+    source: pnpPackage
+    kind: communication
+    category: "Team"
+    description: "Look book template (Team): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Mark8 Project Team"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/mark8projectteam/mark8projectteam.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["project team", "project"]
+    sections: ["hero", "news", "tasks", "documents"]
+  - id: lookbook-product-support
+    name: "Product Support"
+    source: pnpPackage
+    kind: communication
+    category: "Team"
+    description: "Look book template (Team): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Product Support"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/productsupport/productsupport.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["product support", "customer support", "support"]
+    sections: ["hero", "faq", "documents", "quicklinks"]
+  - id: lookbook-branding-site
+    name: "Branding Site"
+    source: pnpPackage
+    kind: communication
+    category: "Community"
+    description: "Look book template (Community): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Branding Site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/contosobrand/contosobrand.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["brand", "branding", "brand and templates"]
+    sections: ["hero", "gallery", "documents"]
+  - id: lookbook-charitable-site
+    name: "Charitable site"
+    source: pnpPackage
+    kind: communication
+    category: "Community"
+    description: "Look book template (Community): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Charitable site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/give/give.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["charity", "giving", "donations", "volunteer"]
+    sections: ["hero", "news", "events"]
+  - id: lookbook-microsoft-365-learning-pathways
+    name: "Microsoft 365 learning pathways"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Microsoft 365 learning pathways"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/M365LearningPathways/M365LP.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["SharePoint Online Admin", "App Catalog"]
+    suggestFor: ["microsoft 365 training", "learning pathways", "adoption", "training"]
+    sections: ["hero", "video", "quicklinks"]
+  - id: lookbook-new-employee-departmental-onboarding-site
+    name: "New employee departmental onboarding site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "New employee departmental onboarding site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/NEO-departmental/template.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["departmental onboarding", "onboarding"]
+    sections: ["hero", "text", "quicklinks", "people"]
+  - id: lookbook-workplace-transformation-site
+    name: "Workplace Transformation site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Workplace Transformation site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/HybridWork/HybridWork.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["hybrid work", "workplace transformation", "return to office", "workplace"]
+    sections: ["hero", "news", "quicklinks", "faq"]
+  - id: lookbook-new-employee-pre-onboarding-site
+    name: "New employee pre-onboarding site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "New employee pre-onboarding site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/NEO-preonboarding/template.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["pre-onboarding", "preboarding", "new hire"]
+    sections: ["hero", "text", "faq"]
+  - id: lookbook-new-employee-corporate-onboarding-site
+    name: "New employee corporate onboarding site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "New employee corporate onboarding site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/NEO-main/template.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["corporate onboarding", "new starters", "onboarding", "new employee"]
+    sections: ["hero", "text", "quicklinks", "people", "faq"]
+  - id: lookbook-microsoft-365-freelance-communications-site
+    name: "Microsoft 365 freelance communications site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Microsoft 365 freelance communications site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/FreelanceToolkit/M365FreelanceCommsSite.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["SharePoint Online Admin"]
+    suggestFor: ["freelance", "freelancers", "contractors"]
+    sections: ["hero", "news", "quicklinks"]
+  - id: lookbook-sharepoint-success-site
+    name: "SharePoint Success Site"
+    source: pnpPackage
+    kind: communication
+    category: "Solutions"
+    description: "Look book template (Solutions): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "SharePoint Success Site"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/tenant/SharePointSuccessSite/SharePointSuccessSite.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["SharePoint Online Admin", "App Catalog"]
+    suggestFor: ["sharepoint adoption", "sharepoint training", "success site", "site owners", "owner training"]
+    sections: ["hero", "video", "quicklinks", "faq"]
+  - id: lookbook-school-home-page
+    name: "School home page"
+    source: pnpPackage
+    kind: communication
+    category: "Schools"
+    description: "Look book template (Schools): a ready-made communication site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "School home page"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/site/eduportal/eduportal.pnp
+    parameters: ["SiteTitle", "SiteUrl"]
+    prerequisites: ["Regular user"]
+    suggestFor: ["school", "schools"]
+    sections: ["hero", "news", "events", "quicklinks"]
+  - id: lookbook-staff-home-page
+    name: "Staff home page"
+    source: pnpPackage
+    kind: teamGroup
+    category: "Schools"
+    description: "Look book template (Schools): a ready-made team site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Staff home page"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/site/edustaff/edustaff.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["Regular user"]
+    suggestFor: ["staff room", "school staff"]
+    sections: ["news", "documents", "calendar"]
+  - id: lookbook-class-home-page
+    name: "Class home page"
+    source: pnpPackage
+    kind: teamGroup
+    category: "Schools"
+    description: "Look book template (Schools): a ready-made team site with its own pages, navigation and sample content, provisioned with PnP PowerShell."
+    url: https://learn.microsoft.com/en-us/sharepoint/dev/solution-guidance/applying-pnp-templates
+    quote: "Class home page"
+    reviewed: 2026-10-28
+    package: https://github.com/SharePoint/sp-dev-provisioning-templates/blob/master/site/educlass/educlass.pnp
+    parameters: ["SiteUrl"]
+    prerequisites: ["Regular user"]
+    suggestFor: ["class", "classroom", "pupils"]
+    sections: ["news", "documents", "tasks"]

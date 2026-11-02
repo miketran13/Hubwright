@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="Hubwright.Desktop.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Hubwright accent. -->
+            <Color x:Key="SystemAccentColor">#6B4FD8</Color>
+            <Color x:Key="SystemAccentColorLight1">#8569E6</Color>
+            <Color x:Key="SystemAccentColorLight2">#A28CEF</Color>
+            <Color x:Key="SystemAccentColorLight3">#C3B5F6</Color>
+            <Color x:Key="SystemAccentColorDark1">#5839C0</Color>
+            <Color x:Key="SystemAccentColorDark2">#452BA0</Color>
+            <Color x:Key="SystemAccentColorDark3">#331F7A</Color>
+
+            <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius>
+            <CornerRadius x:Key="OverlayCornerRadius">10</CornerRadius>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

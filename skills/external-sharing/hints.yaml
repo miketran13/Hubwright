@@ -1,0 +1,21 @@
+hints:
+  - id: sharing-level
+    title: "Set the tenant's sharing level"
+    what: "The most open sharing any site can use: from Anyone (unauthenticated links) down to only people in the organization."
+    why: "SharePoint's defaults are the most permissive; sites can be stricter than the tenant but never looser, so the tenant level is the ceiling."
+    how:
+      - "Choose the level your collaboration needs (the proposal asked about partners and Anyone links)."
+      - "Hubwright sets it (Graph sharepointSettings.sharingCapability)."
+      - "Tighten sites that need less, such as private team sites."
+    example: "Contoso works with partners but never needs Anyone links: New and existing guests."
+    rules: [sharing.most-permissive, sharing.site-looser]
+  - id: default-links
+    title: "Default links and link expiry"
+    what: "The link type a share starts with, and how long Anyone links and guest access last."
+    why: "A default of people in the organization prevents accidental public links; expiring links limit how long content stays exposed."
+    how:
+      - "SharePoint admin center → Policies → Sharing → File and folder links."
+      - "Default: Specific people or Only people in your organization."
+      - "If Anyone links are allowed: set an expiry and View permission."
+    example: "Default link: Only people in Contoso. Anyone links (if on): expire after 30 days, view only."
+    rules: [sharing.default-link, sharing.anyone-expiry, sharing.anyone-edit]

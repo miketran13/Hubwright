@@ -1,0 +1,38 @@
+<Project>
+
+  <ItemGroup>
+    <!-- Model backends: one IChatClient for the claude/copilot CLIs and every API or local backend. -->
+    <PackageVersion Include="Microsoft.Extensions.AI" Version="10.10.0" />
+    <PackageVersion Include="Microsoft.Extensions.AI.Abstractions" Version="10.10.0" />
+    <PackageVersion Include="Microsoft.Extensions.AI.OpenAI" Version="10.10.0" />
+    <PackageVersion Include="Anthropic" Version="12.8.0" />
+    <PackageVersion Include="OpenAI" Version="2.13.0" />
+    <PackageVersion Include="Azure.AI.OpenAI" Version="2.1.0" />
+    <PackageVersion Include="Azure.Identity" Version="1.21.0" />
+
+    <!-- Tools for the CLI backends and for any MCP client: a local stdio MCP server. -->
+    <PackageVersion Include="ModelContextProtocol" Version="1.2.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+
+    <!-- Skills: SKILL.md front matter and rules.yaml. -->
+    <PackageVersion Include="YamlDotNet" Version="16.3.0" />
+
+    <!-- Tenant sign-in (delegated, public client) and the token cache. -->
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.84.2" />
+    <PackageVersion Include="Microsoft.Identity.Client.Broker" Version="4.84.2" />
+    <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.84.2" />
+
+    <!-- Secrets on Windows: DPAPI for the current user. -->
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="9.0.4" />
+
+    <!-- Desktop shell (WinUI 3, unpackaged; WebView2 for the preview studio). -->
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
+
+    <!-- Tests. -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,150 @@
+# Rules for hub-sites. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: hubs.tenant-limit
+    title: "Near the hub limit"
+    scope: tenant
+    when: "hubCount >= $warnAt"
+    severity: high
+    basis: documented
+    params: { warnAt: 1800 }
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "An organization can have up to 2,000 hub sites."
+    reviewed: 2026-10-27
+    message: "{hubCount} hubs; the limit is 2,000."
+    fix: "Merge hubs that serve the same audience; not every function needs one."
+
+  - id: hubs.depth
+    title: "Hub chain deeper than three levels"
+    scope: hub
+    when: "depth > 3"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "When hubs are associated with each other, content can be searched for and displayed on hubs up to three levels of association."
+    reviewed: 2026-10-27
+    message: "{title} is {depth} levels down a hub-to-hub chain; content beyond three levels won't roll up."
+    fix: "Flatten the chain to three levels or fewer."
+
+  - id: hubs.nav-sites
+    title: "Too many links in hub navigation"
+    scope: hub
+    when: "navLinks > $maxLinks"
+    severity: medium
+    basis: documented
+    params: { maxLinks: 100 }
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "From a user experience and performance perspective, the recommended number of links is no more than 100."
+    reviewed: 2026-10-27
+    message: "{title} has {navLinks} navigation links; Microsoft recommends no more than 100."
+    fix: "Group sites under labels, use audience targeting, or link to a Sites web part page."
+
+  - id: hubs.nav-levels
+    title: "Hub navigation deeper than three levels"
+    scope: hub
+    when: "navDepth > 3"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Your hub navigation can have up to three levels"
+    reviewed: 2026-10-27
+    message: "{title} hub navigation has {navDepth} levels."
+    fix: "Reduce hub navigation to three levels."
+
+  - id: hubs.sites-web-part
+    title: "More associated sites than the Sites web part can show"
+    scope: hub
+    when: "associatedSites > 99"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "can be set to filter for \"all sites in the hub\" up to a maximum of 99 sites."
+    reviewed: 2026-10-27
+    message: "{title} has {associatedSites} associated sites; a dynamic Sites web part lists at most 99."
+    fix: "Filter the Sites web part to selected sites, or split the hub."
+
+  - id: hubs.search-scale
+    title: "Very large hub"
+    scope: hub
+    when: "associatedSites >= $warnAt"
+    severity: medium
+    basis: documented
+    params: { warnAt: 2000 }
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "However, you could experience performance issues when you have large numbers of sites associated to a hub."
+    reviewed: 2026-10-27
+    message: "{title} has {associatedSites} associated sites."
+    fix: "Ask whether each topic needs a site; libraries in fewer sites may meet the same goal."
+
+  - id: hubs.theme-only
+    title: "Hub used only for a theme"
+    scope: hub
+    when: "onlyPurposeIsTheme"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "In general, you would not establish a hub when the only outcome goal is to share a consistent theme for all sites."
+    reviewed: 2026-10-27
+    message: "{title} has associated sites but no hub navigation."
+    fix: "Add hub navigation and roll-ups, or apply the theme with a site design instead."
+
+  - id: hubs.extranet
+    title: "Extranet site associated with a hub"
+    scope: hub
+    when: "extranetSitesAssociated > 0"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Don't associate extranet sites with the hub if you don't want extranet users to see the shared navigation."
+    reviewed: 2026-10-27
+    message: "{title} has {extranetSitesAssociated} extranet site(s) associated."
+    fix: "Disassociate the extranet and add it to hub navigation as a link for internal users."
+
+  - id: hubs.private-links
+    title: "Private sites in hub navigation without audience targeting"
+    scope: hub
+    when: "navRestrictedUntargeted > 0"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "If you add private sites to hub navigation, consider using audience targeting so that the link only appears for members of the private site."
+    reviewed: 2026-10-27
+    message: "{title} shows {navRestrictedUntargeted} link(s) to restricted sites to everyone."
+    fix: "Turn on audience targeting for the links, or add (private) to the label."
+
+  - id: hubs.naming
+    title: "Inconsistent hub names"
+    scope: tenant
+    when: "hubNamesConsistent == false"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Try to choose a consistent naming convention for all hub sites."
+    reviewed: 2026-10-27
+    message: "Hub titles don't share one naming pattern."
+    fix: "Pick one convention, for example \"<Function> Hub\", and rename."
+
+  - id: hubs.single-hub
+    title: "One hub for a large intranet"
+    scope: tenant
+    when: "hubCount == 1 and siteCount > $minSites"
+    severity: low
+    basis: documented
+    params: { minSites: 50 }
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "If you have only one hub, you'll miss the ability to easily surface related information in context and the ability to easily define a search scope for related content."
+    reviewed: 2026-10-27
+    message: "{siteCount} sites share a single hub."
+    fix: "Split functions with several services into their own hubs."
+
+  - id: hubs.none
+    title: "No hubs"
+    scope: tenant
+    when: "hubCount == 0 and siteCount >= $minSites"
+    severity: medium
+    basis: documented
+    params: { minSites: 10 }
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Hub sites solve many or most of the use cases for which you previously used subsites."
+    reviewed: 2026-10-27
+    message: "{siteCount} sites and no hubs."
+    fix: "Plan hubs for your main functions (HR, IT, Finance…)."

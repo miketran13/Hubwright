@@ -1,0 +1,74 @@
+# Rules for permissions. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: perm.unique-scopes
+    title: "Too many unique permissions in one list"
+    scope: site
+    when: "permissions.maxUniqueScopesInList > $max"
+    severity: high
+    basis: documented
+    params: { max: 5000 }
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "The supported limit of unique permissions for items in a list or library is 50,000. However, the recommended general limit is 5,000."
+    reviewed: 2026-10-27
+    message: "{title} has a list with {permissions.maxUniqueScopesInList} unique permission scopes."
+    fix: "Restructure into separate libraries or sites with their own permissions instead of item-level sharing."
+
+  - id: perm.large-container
+    title: "Lists too large to change inheritance"
+    scope: site
+    when: "content.largestListItems > 100000"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "When a list, library, or folder contains more than 100,000 items, you can't break permissions inheritance on the list, library, or folder."
+    reviewed: 2026-10-27
+    message: "{title} has a list with {content.largestListItems} items; its inheritance can no longer be changed."
+    fix: "Plan permissions before lists grow; split large libraries by audience."
+
+  - id: perm.everyone
+    title: "Content shared with Everyone or EEEU"
+    scope: site
+    filter: "isHomeSite == false"
+    when: "permissions.everyoneGrants + permissions.eeeuGrants > 0"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "Remove excess users, groups, and company-wide sharing links (including EEEU), and rescope sharing links to approved users or groups."
+    reviewed: 2026-10-30
+    message: "{title} grants access to Everyone/EEEU {permissions.eeeuGrants} time(s)."
+    fix: "Replace broad grants with the site's Visitors group or specific groups; run a site access review."
+
+  - id: perm.ownerless
+    title: "Site without an owner"
+    scope: site
+    when: "ownerCount == 0"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "Assign or confirm site ownership for all remediated sites using SAM site lifecycle management."
+    reviewed: 2026-10-30
+    message: "{title} has no owner."
+    fix: "Assign two owners; set up a site ownership policy."
+
+  - id: perm.single-owner
+    title: "Site with one owner"
+    scope: site
+    when: "ownerCount < $minOwners and ownerCount > 0"
+    severity: low
+    basis: documented
+    params: { minOwners: 2 }
+    source: https://learn.microsoft.com/en-us/sharepoint/site-lifecycle-management
+    quote: "For example, you can require all sites to have at least two site owners."
+    reviewed: 2026-10-27
+    message: "{title} has {ownerCount} owner."
+    fix: "Add a second owner so the site survives people leaving."
+
+  - id: perm.broken-inheritance-public
+    title: "Public site with many unique permissions"
+    scope: site
+    when: "isPublic and permissions.uniqueScopes > $max"
+    severity: medium
+    basis: heuristic
+    params: { max: 50 }
+    message: "{title} is public and has {permissions.uniqueScopes} unique permission scopes."
+    fix: "Large audiences with broken inheritance are a high-risk combination; review the unique permissions."

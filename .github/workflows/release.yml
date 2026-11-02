@@ -1,0 +1,93 @@
+name: release
+# Push a tag like v0.2.0 to publish downloads: the desktop app for Windows (self-contained, with the
+# CLI beside it) and single-file CLIs for Windows, Linux and macOS. Nobody needs the .NET SDK.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  cli:
+    strategy:
+      matrix:
+        rid: [win-x64, win-arm64, linux-x64, osx-arm64]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet test tests/Hubwright.Tests -c Release
+      - name: Publish
+        run: dotnet publish src/Hubwright.Cli -c Release -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -p:DebugType=none -o out/hubwright-cli-${{ matrix.rid }}
+      - name: Package
+        run: |
+          cd out
+          if [[ "${{ matrix.rid }}" == win-* ]]; then zip -qr hubwright-cli-${{ matrix.rid }}.zip hubwright-cli-${{ matrix.rid }}; else tar -czf hubwright-cli-${{ matrix.rid }}.tar.gz hubwright-cli-${{ matrix.rid }}; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-${{ matrix.rid }}
+          path: out/hubwright-cli-${{ matrix.rid }}.*
+
+  desktop:
+    strategy:
+      matrix:
+        rid: [win-x64, win-arm64]
+    runs-on: windows-latest
+    env:
+      SIGNING_CERT: ${{ secrets.SIGNING_CERT }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Publish the desktop app and the CLI into one folder
+        shell: pwsh
+        run: |
+          $dir = "out/Hubwright-${{ matrix.rid }}"
+          dotnet publish src/Hubwright.Desktop -c Release -r ${{ matrix.rid }} --self-contained -p:DebugType=none -o $dir
+          dotnet publish src/Hubwright.Cli -c Release -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -p:DebugType=none -o $dir
+      - name: Sign (only when the maintainer has added a code-signing certificate)
+        if: ${{ env.SIGNING_CERT != '' }}
+        shell: pwsh
+        run: |
+          $pfx = Join-Path $env:RUNNER_TEMP 'sign.pfx'
+          [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:SIGNING_CERT))
+          $signtool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin" -Recurse -Filter signtool.exe | Where-Object FullName -match 'x64' | Select-Object -Last 1
+          & $signtool.FullName sign /f $pfx /p $env:SIGNING_PASSWORD /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 "out/Hubwright-${{ matrix.rid }}/Hubwright.Desktop.exe" "out/Hubwright-${{ matrix.rid }}/hubwright.exe"
+          Remove-Item $pfx
+      - name: Package
+        shell: pwsh
+        run: Compress-Archive -Path "out/Hubwright-${{ matrix.rid }}" -DestinationPath "out/Hubwright-${{ matrix.rid }}.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.rid }}
+          path: out/Hubwright-${{ matrix.rid }}.zip
+
+  publish:
+    needs: [cli, desktop]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Software bill of materials (SPDX)
+        run: |
+          dotnet tool install --global Microsoft.Sbom.DotNetTool
+          dotnet restore Hubwright.slnx -p:EnableWindowsTargeting=true
+          sbom-tool generate -b dist -bc . -pn Hubwright -pv "${{ github.ref_name }}" -ps "Hubwright contributors" -nsb https://github.com/${{ github.repository }}
+          (cd dist/_manifest && zip -qr ../hubwright-sbom.zip .) && rm -rf dist/_manifest
+      - name: Checksums
+        run: cd dist && sha256sum * > SHA256SUMS.txt
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ github.ref_name }}" dist/* --repo "${{ github.repository }}" --title "Hubwright ${{ github.ref_name }}" --generate-notes

@@ -1,0 +1,6 @@
+questions:
+  - id: share.invite
+    text: "Who may invite guests?"
+    why: "Sets the sharing level for the tenant and the sites that need guests."
+    choices: ["Site owners", "Site owners and members", "Admins only, on request"]
+    default: "Site owners"

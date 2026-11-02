@@ -1,0 +1,33 @@
+name: New skill or rule
+description: Propose a SharePoint best practice for Hubwright to check
+labels: [skill]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: What should Hubwright check?
+      placeholder: "Hub navigation links to private sites without audience targeting"
+    validations:
+      required: true
+  - type: dropdown
+    id: basis
+    attributes:
+      label: Basis
+      options:
+        - Documented by Microsoft (I have the URL and exact sentence)
+        - Heuristic (a judgment call with a tunable threshold)
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+  - type: textarea
+    id: quote
+    attributes:
+      label: Exact quote from the source
+  - type: textarea
+    id: rule
+    attributes:
+      label: Draft rule (optional)
+      render: yaml

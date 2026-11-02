@@ -1,0 +1,60 @@
+# Rules for information-architecture. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: ia.subsites
+    title: "Subsites in use"
+    scope: site
+    when: "subsiteCount > 0"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "In the modern SharePoint experience, subsites aren't recommended."
+    reviewed: 2026-10-27
+    message: "{title} has {subsiteCount} subsite(s)."
+    fix: "Plan one site per unit of work and connect them with a hub. Migrate subsites that still matter, archive the rest."
+
+  - id: ia.subsites-tenant
+    title: "Subsites instead of hubs across the tenant"
+    scope: tenant
+    when: "sitesWithSubsites > 0 and hubCount == 0"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "We recommend creating sites and organizing them into hubs instead of creating subsites."
+    reviewed: 2026-10-27
+    message: "{sitesWithSubsites} site(s) use subsites and there are no hubs."
+    fix: "Create hubs for your main functions and associate sites with them."
+
+  - id: ia.folder-depth
+    title: "Deep folder nesting"
+    scope: site
+    when: "content.maxFolderDepth > $maxDepth"
+    severity: low
+    basis: documented
+    params: { maxDepth: 2 }
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "folder structures with more than one or two levels of nesting create a significant discoverability burden for users and should be avoided."
+    reviewed: 2026-10-27
+    message: "{title} has folders {content.maxFolderDepth} levels deep."
+    fix: "Add topic-specific libraries and site columns instead of nesting folders."
+
+  - id: ia.nav-child-limit
+    title: "Navigation level at the 500-link limit"
+    scope: site
+    when: "navMaxChildren >= 500"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "All navigation types (site, hub, global, and footer) are limited to 500 child links at each level."
+    reviewed: 2026-10-27
+    message: "{title} has {navMaxChildren} links at one navigation level; new links will fail."
+    fix: "Group links under labels or move them onto a navigation page."
+
+  - id: ia.orphan-sites
+    title: "Many sites belong to no hub"
+    scope: tenant
+    when: "siteCount >= $minSites and sitesWithoutHub / siteCount > $maxShare"
+    severity: low
+    basis: heuristic
+    params: { minSites: 20, maxShare: 0.5 }
+    message: "{sitesWithoutHub} of {siteCount} sites are in no hub."
+    fix: "Not every site needs a hub, but communication sites for shared services usually belong to one. Review the list."

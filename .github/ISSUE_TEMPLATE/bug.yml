@@ -1,0 +1,20 @@
+name: Bug or collector problem
+description: Something Hubwright got wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command or page
+  - type: textarea
+    id: issues
+    attributes:
+      label: Scan issues or error output
+      description: Never paste a snapshot from a real tenant; it contains URLs and names.
+      render: text

@@ -1,0 +1,66 @@
+hints:
+  - id: theme
+    title: "Add the organization's theme"
+    what: "A custom theme in the tenant, built from your brand colour, that site owners pick in Change the look."
+    why: "An organization theme keeps sites consistent; every text colour is checked for contrast so pages stay readable, and default themes can be hidden."
+    how:
+      - "Edit it in the theme editor if you like (colours, background, logo)."
+      - "Hubwright adds it to the tenant (or updates it if a theme with this name exists)."
+      - "Apply it to the new sites (the next steps) and hide the default themes."
+    example: "\"Contoso brand\", primary #0f6cbd, every text pair at least 4.5:1."
+    rules: [brand.no-org-theme, brand.contrast, brand.default-themes-visible]
+  - id: apply-theme
+    title: "Apply the theme to a site"
+    what: "Sets the site's colours to the organization theme."
+    why: "Hubs share their theme with associated sites, but new sites start with the default; applying it once keeps every site on brand."
+    how:
+      - "Hubwright applies it right after the site is created."
+      - "Owners can still see it under Settings → Change the look → Theme."
+    example: "\"HR – Benefits\" uses \"Contoso brand\" from its first day."
+    rules: [brand.contrast]
+  - id: site-logo
+    title: "Add the site logo"
+    what: "The logo in each site's header, and a square thumbnail used where SharePoint needs a square image."
+    why: "A recognisable logo tells people they are on the official intranet; SharePoint scales it into the header, so the right shape matters."
+    how:
+      - "Add the logo in the theme editor; it checks the size and shape and suggests colours from it."
+      - "On each site: Settings → Change the look → Header → Site logo, and Site logo thumbnail (square)."
+      - "Use a version with a transparent background so it works on the themed header."
+    example: "contoso-logo.png at 192 x 64 for the header, contoso-mark.png at 64 x 64 as the thumbnail."
+    source: https://support.microsoft.com/en-us/office/change-the-look-of-your-sharepoint-site-06bbadc3-6b04-4a60-9d14-894f6a170818
+    quote: "please pick one that fits within the range of 64 x 64 pixels to 192 x 64 pixels"
+    reviewed: 2026-10-28
+  - id: site-header
+    title: "Colour the site header"
+    what: "The band at the top of each site with its logo, title and navigation; its background can use the theme's colour."
+    why: "SharePoint shows a white header until the background emphasis is set, so a new theme can look as if it wasn't applied. Strong emphasis colours the header with the theme."
+    how:
+      - "Hubwright sets the header layout and a strong background (PnP PowerShell's Set-PnPWebHeader)."
+      - "By hand: Settings → Change the look → Header → Background."
+    example: "\"HR – Benefits\": Standard layout, strong background in the brand colour."
+    source: https://pnp.github.io/powershell/cmdlets/Set-PnPWebHeader.html
+    quote: "Sets the site to use a strong colored bar at the top of the site"
+    reviewed: 2026-10-29
+  - id: m365-header
+    title: "Colour the Microsoft 365 header"
+    what: "The bar across the very top of SharePoint and every Microsoft 365 app (app launcher, search, your picture)."
+    why: "It belongs to the Microsoft 365 organization theme, not to SharePoint themes, so applying a SharePoint theme never changes it. Matching it to the brand makes the intranet feel like one product."
+    how:
+      - "A Global Administrator opens Microsoft 365 admin center → Settings → Org settings → Organization profile → Custom themes."
+      - "Default theme → Colors: navigation bar, text and icon, and accent colours from the step → Save."
+      - "Logos: an HTTPS image URL anyone can open, or a small upload."
+    example: "Navigation bar #6b4fd8, text and icons #ffffff, accent #6b4fd8."
+    source: https://learn.microsoft.com/en-us/microsoft-365/admin/setup/customize-your-organization-theme
+    quote: "The organization theme appears in the top navigation bar for people in your organization."
+    reviewed: 2026-10-29
+  - id: brand-center
+    title: "Brand center"
+    what: "One place for the organization's colours, fonts, logos and images, used by SharePoint and Office."
+    why: "Owners pick approved colours and images instead of uploading their own copies."
+    how:
+      - "A Global Administrator turns it on: Microsoft 365 admin center → Settings → Org settings → Brand center."
+      - "Brand managers (owners of the brand center site) add the colours, logo and images."
+    example: "Contoso brand: primary blue, the logo in two sizes, 30 approved photos."
+    source: https://learn.microsoft.com/en-us/sharepoint/brand-center-overview
+    quote: "With this new brand asset management system, you can handle your colors, fonts, and images, and other assets all in one place."
+    reviewed: 2026-10-30

@@ -1,0 +1,348 @@
+# The security baseline. Each setting: what it sets, the value per profile (standard, strict,
+# regulated; a missing profile leaves it out), how it is applied (graph | pnp | guided) and the page it
+# follows. Documented settings quote Microsoft verbatim (`hubwright skills refresh` re-checks them);
+# heuristic ones say what the value is based on in `note`.
+settings:
+  - id: sharing-level
+    title: "External sharing level"
+    area: sharing
+    apply: graph
+    property: sharingCapability
+    targets: { standard: externalUserSharingOnly, strict: existingExternalUserSharingOnly, regulated: disabled }
+    fact: sharingLevel
+    why: "The tenant level is the ceiling for every site: guests who sign in can be audited; Anyone links can't."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "Disable or restrict use of company-wide sharing groups and Anyone links at the tenant level."
+    reviewed: 2026-10-30
+    rules: [sharing.most-permissive]
+    hint: baseline-sharing
+
+  - id: default-link-type
+    title: "Default sharing link"
+    area: links
+    apply: pnp
+    property: DefaultSharingLinkType
+    targets: { standard: Internal, strict: Direct, regulated: Direct }
+    fact: defaultLinkType
+    why: "The link a share starts with is the one most people send; make it one that can't leave the organization."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "You can mitigate this risk by changing the default link setting to a link that only works for people inside your organization."
+    reviewed: 2026-10-30
+    rules: [sharing.default-link]
+    hint: baseline-links
+
+  - id: default-link-permission
+    title: "Default link permission"
+    area: links
+    apply: pnp
+    property: DefaultLinkPermission
+    targets: { standard: View, strict: View, regulated: View }
+    fact: defaultLinkPermission
+    why: "People pick Edit when they mean it; a View default avoids accidental editors."
+    basis: heuristic
+    note: "Hubwright's choice: least privilege by default. The setting itself is documented on the Set-PnPTenant page."
+    source: https://pnp.github.io/powershell/cmdlets/Set-PnPTenant.html
+    quote: "Sets the default permission of the link in the sharing dialog box in OneDrive for Business and SharePoint Online."
+    reviewed: 2026-10-30
+    hint: baseline-links
+
+  - id: anyone-link-expiry
+    title: "Anyone links expire after (days)"
+    area: links
+    apply: pnp
+    property: RequireAnonymousLinksExpireInDays
+    type: int
+    targets: { standard: "30", strict: "7", regulated: "7" }
+    fact: anyoneLinkExpirationDays
+    why: "If Anyone links are ever allowed, they should stop working on their own."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "To mitigate this possibility, you can configure an expiration time for Anyone links."
+    reviewed: 2026-10-30
+    note: "The number of days is Hubwright's default; Microsoft recommends an expiry, not a number."
+    rules: [sharing.anyone-expiry]
+    hint: baseline-links
+
+  - id: anyone-file-permission
+    title: "Anyone links on files"
+    area: links
+    apply: pnp
+    property: FileAnonymousLinkType
+    targets: { standard: View, strict: View, regulated: View }
+    fact: anyoneFileLinkPermission
+    why: "An unauthenticated link should never let a stranger change a file."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "consider setting the file permissions to View and folder permissions to View or View and upload"
+    reviewed: 2026-10-30
+    rules: [sharing.anyone-edit]
+    hint: baseline-links
+
+  - id: anyone-folder-permission
+    title: "Anyone links on folders"
+    area: links
+    apply: pnp
+    property: FolderAnonymousLinkType
+    targets: { standard: View, strict: View, regulated: View }
+    fact: anyoneFolderLinkPermission
+    why: "An unauthenticated link should never let a stranger change or delete files in a folder."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "consider setting the file permissions to View and folder permissions to View or View and upload"
+    reviewed: 2026-10-30
+    rules: [sharing.anyone-edit]
+    hint: baseline-links
+
+  - id: guest-expiration-required
+    title: "Guest access expires"
+    area: guests
+    apply: pnp
+    property: ExternalUserExpirationRequired
+    type: bool
+    targets: { standard: "true", strict: "true", regulated: "true" }
+    fact: guestExpirationRequired
+    why: "Projects end; guest access should end with them unless someone renews it."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/turn-external-sharing-on-or-off
+    quote: "Administrators can set an expiration time for guest access."
+    reviewed: 2026-10-30
+    hint: baseline-guests
+
+  - id: guest-expiration-days
+    title: "Guest access expires after (days)"
+    area: guests
+    apply: pnp
+    property: ExternalUserExpireInDays
+    type: int
+    targets: { standard: "90", strict: "60", regulated: "30" }
+    fact: guestAccessExpirationDays
+    why: "A fixed window makes owners renew the guests they still need."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/turn-external-sharing-on-or-off
+    quote: "Administrators can set an expiration time for guest access."
+    reviewed: 2026-10-30
+    note: "The number of days is Hubwright's default."
+    hint: baseline-guests
+
+  - id: guest-reshare
+    title: "Guests can reshare items they don't own"
+    area: guests
+    apply: graph
+    property: isResharingByExternalUsersEnabled
+    type: bool
+    targets: { standard: "false", strict: "false", regulated: "false" }
+    why: "Only people inside the organization should decide who else gets access."
+    basis: heuristic
+    note: "Hubwright's choice: guests share back through an owner. The setting is documented in Graph sharepointSettings."
+    source: https://learn.microsoft.com/en-us/graph/api/sharepointsettings-update
+    quote: "Indicates whether guests are allowed to reshare files, folders, and sites they don't own."
+    reviewed: 2026-10-30
+    hint: baseline-guests
+
+  - id: guest-same-account
+    title: "Guests must sign in with the invited account"
+    area: guests
+    apply: graph
+    property: isRequireAcceptingUserToMatchInvitedUserEnabled
+    type: bool
+    targets: { standard: "true", strict: "true", regulated: "true" }
+    why: "An invitation forwarded to someone else shouldn't give them access."
+    basis: heuristic
+    note: "Hubwright's choice. The setting is documented in Graph sharepointSettings."
+    source: https://learn.microsoft.com/en-us/graph/api/sharepointsettings-update
+    quote: "Indicates whether guests must sign in using the same account to which sharing invitations are sent."
+    reviewed: 2026-10-30
+    hint: baseline-guests
+
+  - id: legacy-auth
+    title: "Legacy authentication protocols"
+    area: sessions
+    apply: graph
+    property: isLegacyAuthProtocolsEnabled
+    type: bool
+    targets: { standard: "false", strict: "false", regulated: "false" }
+    why: "Old protocols can't do multifactor authentication, so attackers use them to guess passwords."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication
+    quote: "Microsoft recommends that organizations block authentication requests using legacy protocols that don't support multifactor authentication."
+    reviewed: 2026-10-30
+    hint: baseline-sessions
+
+  - id: idle-sign-out
+    title: "Sign out inactive users"
+    area: sessions
+    apply: graph
+    property: idleSessionSignOut
+    type: json
+    targets:
+      strict: '{"isEnabled":true,"warnAfterInSeconds":2700,"signOutAfterInSeconds":3600}'
+      regulated: '{"isEnabled":true,"warnAfterInSeconds":2700,"signOutAfterInSeconds":3600}'
+    why: "A browser left open on a shared or unmanaged PC shouldn't stay signed in."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/sign-out-inactive-users
+    quote: "Idle session sign-out lets you specify a time at which users are warned and are later signed out of Microsoft 365 after a period of browser inactivity in SharePoint and OneDrive."
+    reviewed: 2026-10-30
+    note: "45 minutes to the warning and 60 to sign-out are the values in Microsoft's PowerShell example. Needs Microsoft Entra ID P1 or P2."
+    hint: baseline-sessions
+
+  - id: unmanaged-devices
+    title: "Access from unmanaged devices"
+    area: devices
+    apply: guided
+    targets: { strict: "Limited, web-only access", regulated: "Block access" }
+    why: "Files downloaded to a personal device leave your control; web-only access keeps people productive without that risk."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/control-access-from-unmanaged-devices
+    quote: "Limiting access allows users to remain productive while addressing the risk of accidental data loss on unmanaged devices."
+    reviewed: 2026-10-30
+    guideUrl: https://go.microsoft.com/fwlink/?linkid=2185071
+    instructions:
+      - "SharePoint admin center → Policies → Access control → Unmanaged devices."
+      - "Strict: Allow limited, web-only access. Regulated: Block access. Save."
+      - "Also: Apps that don't use modern authentication → Block access."
+      - "This creates a Conditional Access policy for all users (needs Microsoft Entra ID P1 or P2); try it with a pilot group first."
+    hint: baseline-devices
+
+  - id: custom-script
+    title: "Custom script"
+    area: sessions
+    apply: guided
+    targets: { standard: "false", strict: "false", regulated: "false" }
+    fact: customScriptAllowed
+    why: "Scripts added to pages run with the visitor's permissions; SPFx solutions are reviewed and deployed centrally instead."
+    basis: heuristic
+    note: "Hubwright's rule modern.custom-script."
+    guideUrl: "{admin}/_layouts/15/online/AdminHome.aspx"
+    instructions:
+      - "SharePoint admin center → Settings → Classic settings page → Custom Script."
+      - "Prevent users from running custom script on personal sites and on self-service created sites."
+    rules: [modern.custom-script]
+    hint: baseline-sessions
+
+  - id: sensitivity-labels
+    title: "Sensitivity labels for sites and teams"
+    area: labels
+    apply: guided
+    targets: { strict: "true", regulated: "true" }
+    fact: sensitivityLabelsEnabled
+    why: "A label on a site sets its privacy, guest access and device rules in one place, and tells Copilot what is sensitive."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "to reflect data sensitivity and restrict oversharing"
+    reviewed: 2026-10-30
+    guideUrl: https://purview.microsoft.com
+    instructions:
+      - "Microsoft Purview → Information protection → Sensitivity labels."
+      - "Turn on labels for containers (groups and sites), then publish a label policy with a default label for sites."
+    rules: [copilot.unlabeled]
+    hint: baseline-labels
+
+  - id: dlp-anyone
+    title: "DLP blocks Anyone links on sensitive content"
+    area: labels
+    apply: guided
+    targets: { strict: "true", regulated: "true" }
+    fact: dlpBlocksAnyoneLinks
+    why: "Even where Anyone links are allowed, content with sensitive data shouldn't be shared that way."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "You can use Microsoft Purview Data Loss Prevention (DLP) to prevent unauthenticated sharing of sensitive content."
+    reviewed: 2026-10-30
+    guideUrl: https://purview.microsoft.com
+    instructions:
+      - "Microsoft Purview → Data loss prevention → Policies → Create policy."
+      - "Locations: SharePoint sites and OneDrive accounts. Condition: content contains sensitive info and is shared with people outside the organization."
+      - "Action: restrict access (block people outside your organization)."
+    rules: [sharing.dlp]
+    hint: baseline-labels
+
+  - id: restricted-access-control
+    title: "Restricted access control for sensitive sites"
+    area: sam
+    apply: guided
+    targets: { strict: "true", regulated: "true" }
+    fact: restrictedAccessControlEnabled
+    why: "Limits a sensitive site to one group, whatever links or permissions exist inside it."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "by default for business-critical sites at provisioning time"
+    reviewed: 2026-10-30
+    guideUrl: "{admin}/_layouts/15/online/AdminHome.aspx#/siteManagement"
+    instructions:
+      - "Needs SharePoint Advanced Management."
+      - "Turn it on for the tenant, then per site: Active sites → select the site → Settings → Restricted site access → choose the group."
+    rules: [copilot.rac]
+    hint: baseline-sam
+
+  - id: data-access-governance
+    title: "Data access governance reports"
+    area: sam
+    apply: guided
+    targets: { standard: "Reviewed", strict: "Reviewed", regulated: "Reviewed" }
+    why: "Shows the sites shared with everyone or with many links, so you fix the riskiest first."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "for high-risk sites so site owners can manage access"
+    reviewed: 2026-10-30
+    guideUrl: "{admin}/_layouts/15/online/AdminHome.aspx"
+    instructions:
+      - "SharePoint admin center → Reports → Data access governance."
+      - "Run the 'Everyone except external users' and sharing links reports; start a site access review for the top sites."
+    rules: [copilot.dag]
+    hint: baseline-sam
+
+  - id: inactive-site-policy
+    title: "Inactive site policy"
+    area: lifecycle
+    apply: guided
+    targets: { standard: "true", strict: "true", regulated: "true" }
+    fact: inactiveSitePolicies
+    why: "Old sites keep old permissions; owners confirm they still need them, or the site is archived."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/site-lifecycle-management
+    quote: "Many organizations achieve the best results by combining all three policy types:"
+    reviewed: 2026-10-30
+    guideUrl: "{admin}/_layouts/15/online/AdminHome.aspx"
+    instructions:
+      - "Needs SharePoint Advanced Management."
+      - "SharePoint admin center → Policies → Site lifecycle management → Inactive sites → Create policy (simulation first)."
+    rules: [lifecycle.all-three, lifecycle.inactive-site]
+    hint: baseline-lifecycle
+
+  - id: site-ownership-policy
+    title: "Site ownership policy"
+    area: lifecycle
+    apply: guided
+    targets: { standard: "true", strict: "true", regulated: "true" }
+    fact: siteOwnershipPolicies
+    why: "Every site needs someone accountable; the policy finds sites that lost their owners."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/site-lifecycle-management
+    quote: "Site ownership policies help reduce the risk of ownerless sites and improve administrative continuity when users change roles or leave the organization."
+    reviewed: 2026-10-30
+    guideUrl: "{admin}/_layouts/15/online/AdminHome.aspx"
+    instructions:
+      - "SharePoint admin center → Policies → Site lifecycle management → Site ownership → Create policy."
+      - "Require at least two owners."
+    rules: [lifecycle.ownerless-many]
+    hint: baseline-lifecycle
+
+  - id: backup
+    title: "Backup and restore"
+    area: lifecycle
+    apply: guided
+    targets: { strict: "true", regulated: "true" }
+    fact: backupEnabled
+    why: "Ransomware and mistakes happen; a backup you can restore from is the last line of defence."
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/backup/backup-overview
+    quote: "you need to be able to get your business back to a healthy state as soon as possible"
+    reviewed: 2026-10-30
+    guideUrl: https://admin.microsoft.com
+    instructions:
+      - "Microsoft 365 admin center → Settings → Microsoft 365 Backup (pay-as-you-go billing is required)."
+      - "Add a SharePoint policy for the intranet's home site and hubs."
+    rules: [copilot.backup]
+    hint: baseline-lifecycle

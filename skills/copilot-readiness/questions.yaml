@@ -1,0 +1,6 @@
+questions:
+  - id: copilot.rollout
+    text: "When will Microsoft 365 Copilot reach your users?"
+    why: "Oversharing reviews and Restricted Content Discovery should be done before Copilot can surface content."
+    choices: ["Already live", "Within three months", "Later", "Not planned"]
+    default: "Within three months"

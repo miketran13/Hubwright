@@ -1,0 +1,22 @@
+hints:
+  - id: apply-template
+    title: "Apply a SharePoint site template"
+    what: "Microsoft's ready-made pages, page templates and news templates for a kind of site (HR, onboarding, IT help desk…)."
+    why: "Starting from a template is faster and more consistent than a blank home page; apply it before adding content, because content does not merge with a newly applied template."
+    how:
+      - "Open the site (Hubwright opens it in the pane on the right)."
+      - "Settings (gear) → Apply a site template → Microsoft → the template → Use template."
+      - "Replace the template's sample text and images with your own."
+    example: "On \"HR – Benefits\": Apply a site template → Human resources."
+    source: https://support.microsoft.com/en-us/office/apply-and-customize-sharepoint-site-templates-39382463-0e45-4d1b-be27-0e96aeec8398
+    quote: "When you apply a template to an existing site, your content will not automatically merge with the new template."
+    reviewed: 2026-10-28
+  - id: lookbook-package
+    title: "Provision a look book package"
+    what: "A complete ready-made site (pages, navigation, sample content) from the SharePoint look book, as a .pnp file."
+    why: "It gives a polished starting point for sites like a home page or an HR hub; it creates the site itself."
+    how:
+      - "Download the .pnp package (the link is in the step)."
+      - "As a SharePoint admin, run the PnP PowerShell command in the step (Connect-PnPOnline, then Invoke-PnPTenantTemplate)."
+      - "Replace the sample content, then mark the step done so the next steps can run."
+    example: "Invoke-PnPTenantTemplate -Path .\\thelanding.pnp -Parameters @{\"SiteTitle\"=\"Contoso Home\";\"SiteUrl\"=\"/sites/home\"}"

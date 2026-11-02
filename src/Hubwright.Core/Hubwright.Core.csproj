@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Hubwright</RootNamespace>
+    <Description>Pure domain logic: the tenant snapshot, the rule expression language, scoring, blueprints, theme palettes and WCAG contrast. No I/O, no network, no model calls.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Hubwright.Tests" />
+  </ItemGroup>
+
+</Project>

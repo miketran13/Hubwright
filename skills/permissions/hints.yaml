@@ -1,0 +1,34 @@
+hints:
+  - id: add-owners
+    title: "Give every site two owners"
+    what: "At least two people responsible for each site's members, content and lifecycle."
+    why: "Ownerless sites can't be reviewed or kept current, and one owner leaving shouldn't orphan a site."
+    how:
+      - "Ask the site's main contributor who should co-own it."
+      - "Admin center → Active sites → the site → Membership → add owners."
+      - "Turn on the site ownership policy so it stays that way."
+    example: "Project 7 had one owner; its project lead is added as a second."
+    rules: [perm.ownerless, perm.single-owner]
+  - id: review-permissions
+    title: "Review access open to everyone"
+    what: "Grants to Everyone or Everyone except external users, and Anyone links, on sites that may hold sensitive content."
+    why: "Broad access plus easy discovery (search, Copilot) can expose content to people who shouldn't see it."
+    how:
+      - "Open the site's permissions (the step lists each site's link)."
+      - "Replace Everyone grants with the site's Visitors group or specific groups."
+      - "Remove Anyone links that aren't needed."
+    example: "\"All Company\" had Everyone except external users as Members; it becomes Visitors, and the HR folder gets its own library for HR."
+    rules: [perm.everyone, sharing.anyone-links-on-site, perm.broken-inheritance-public]
+  - id: unread-site
+    title: "Check the sites the scan could not read"
+    what: "Sites that exist in the tenant (the usage report lists them) but that the person who scanned is not a member of, so their owners, permissions and content were not read."
+    why: "Hubwright reads as you and never gives itself access. A site it could not read is not assessed, not passed: private sites are often the ones that need a look most."
+    how:
+      - "Admin center → Active sites → the site → Membership: owners and site admins show there without joining the site."
+      - "Ask the site's owner to check its owners, Everyone grants and sharing links."
+      - "To scan it, add yourself or a scanning account as a site admin there (Membership), scan again, then remove it. A site admin sees everything in the site, so agree it with the owner first."
+      - "Score, Findings, Structure and Reports list these sites, with Open Active sites and Save as CSV."
+    example: "\"hr-casework\" was not readable: its owner confirms two owners and no Everyone grants."
+    source: https://learn.microsoft.com/en-us/sharepoint/site-permissions
+    quote: "They also have access to any items in the site, including in subsites, even if permissions inheritance has been broken."
+    reviewed: 2026-10-31

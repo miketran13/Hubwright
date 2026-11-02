@@ -1,0 +1,4 @@
+questions:
+  - id: brand.owner
+    text: "Who approves the theme, logo and header for every site?"
+    why: "With default themes hidden, the organization's themes are the only choices; someone owns them."

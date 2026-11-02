@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+.vs/
+*.suo
+TestResults/
+publish/
+# Never commit tenant data
+snapshot*.json
+!docs/examples/*.json

@@ -1,0 +1,58 @@
+# Rules for modernization. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: modern.classic-theme
+    title: "Classic theme on a site"
+    scope: site
+    when: "usesClassicTheme"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-overview
+    quote: "For the simplest experience, we recommend that you use modern themes with modern pages."
+    reviewed: 2026-10-27
+    message: "{title} uses a classic theme."
+    fix: "Apply one of the organization's modern themes."
+
+  - id: modern.classic-sites
+    title: "Classic sites"
+    scope: tenant
+    when: "classicSiteCount > 0"
+    severity: low
+    basis: heuristic
+    message: "{classicSiteCount} site(s) use classic templates."
+    fix: "Plan modernisation: connect to a group, modernise pages, join a hub."
+
+  - id: modern.custom-script
+    title: "Custom script allowed"
+    scope: tenant
+    when: "settings.customScriptAllowed"
+    severity: medium
+    basis: heuristic
+    message: "Custom script is allowed on the tenant."
+    fix: "Prefer SPFx solutions; block custom script unless a site needs it, and review why."
+
+  - id: modern.classic-publishing
+    title: "Classic publishing in use"
+    scope: site
+    when: "content.usesClassicPublishing"
+    severity: low
+    basis: heuristic
+    message: "{title} uses the classic publishing feature."
+    fix: "Move to a communication site; Page Diagnostics notes publishing can increase page load times."
+
+  - id: modern.infopath
+    title: "InfoPath forms in use"
+    scope: site
+    when: "content.usesInfoPath"
+    severity: medium
+    basis: heuristic
+    message: "{title} uses InfoPath forms."
+    fix: "Rebuild with Power Apps or Microsoft Forms."
+
+  - id: modern.classic-workflows
+    title: "Classic workflows in use"
+    scope: site
+    when: "content.usesClassicWorkflows"
+    severity: medium
+    basis: heuristic
+    message: "{title} uses SharePoint 2010/2013 workflows."
+    fix: "Rebuild with Power Automate."

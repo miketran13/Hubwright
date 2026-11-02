@@ -1,0 +1,4 @@
+questions:
+  - id: nav.top
+    text: "Which five or six links must be in the global navigation?"
+    why: "The app bar's global navigation is the same on every site; keep it short and task-based."

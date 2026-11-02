@@ -1,0 +1,21 @@
+# Rules for governance. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: gov.roles
+    title: "Name the intranet roles"
+    kind: advisory
+    scope: tenant
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "Information architecture for your organization is most effective when many types of roles collaborate on your intranet"
+    reviewed: 2026-10-27
+    fix: "Record the intranet owner, department owners, IT contact and hub owners in a governance page."
+
+  - id: gov.self-service
+    title: "Anyone can create sites, with no lifecycle policies"
+    scope: tenant
+    when: "settings.selfServiceSiteCreation and settings.inactiveSitePolicies == 0"
+    severity: medium
+    basis: heuristic
+    message: "Self-service site creation is on and no inactive-site policy cleans up after it."
+    fix: "Keep self-service (it helps adoption) but add lifecycle policies, or route creation through a request process."

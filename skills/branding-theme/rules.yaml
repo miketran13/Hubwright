@@ -1,0 +1,58 @@
+# Rules for branding-theme. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: brand.no-org-theme
+    title: "No organization theme"
+    scope: tenant
+    when: "customThemeCount == 0"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-overview
+    quote: "For example, you can define custom themes based on your organization's branding or identity, and make those the only available themes within your sites."
+    reviewed: 2026-10-27
+    message: "The tenant offers no custom theme."
+    fix: "Design a theme in the Hubwright preview studio and publish it with Add-SPOTheme."
+
+  - id: brand.default-themes-visible
+    title: "Default themes still offered"
+    scope: tenant
+    when: "customThemeCount > 0 and settings.hideDefaultThemes == false"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-overview
+    quote: "For example, you can define custom themes based on your organization's branding or identity, and make those the only available themes within your sites."
+    reviewed: 2026-10-27
+    message: "Custom themes exist but the default themes are still offered."
+    fix: "Run Set-SPOHideDefaultThemes $true."
+
+  - id: brand.contrast
+    title: "Theme fails WCAG contrast"
+    scope: tenant
+    when: "themesFailingContrast > 0"
+    severity: medium
+    basis: documented
+    source: https://www.w3.org/TR/WCAG21/
+    quote: "The visual presentation of text and images of text has a contrast ratio of at least 4.5:1"
+    reviewed: 2026-10-27
+    message: "{themesFailingContrast} theme(s) have a text colour below the WCAG 2.1 AA ratio."
+    fix: "Open the theme in the preview studio; it suggests the nearest accessible colour."
+
+  - id: brand.hub-themes
+    title: "Hubs use many different themes"
+    scope: tenant
+    when: "distinctHubThemes > $max"
+    severity: info
+    basis: heuristic
+    params: { max: 3 }
+    message: "Hubs use {distinctHubThemes} different themes."
+    fix: "Use one organization theme, with accent variations only where a family needs to stand out."
+
+  - id: brand.classic-test
+    title: "Test classic themes on modern pages for readability"
+    kind: advisory
+    scope: tenant
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-overview
+    quote: "If you need to use classic themes with modern pages, test your site carefully to verify that your content is readable and accessible."
+    reviewed: 2026-10-27
+    fix: "Preview the pages in light and dark, desktop and mobile."

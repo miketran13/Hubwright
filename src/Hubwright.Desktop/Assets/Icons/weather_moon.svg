@@ -1,0 +1,16 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Hubwright's own icon, in the style of the Fluent colour icons: a crescent moon for dark mode. -->
+<path d="M20.2 15.1C19.1 15.6 17.9 15.9 16.6 15.9C11.9 15.9 8.1 12.1 8.1 7.4C8.1 5.9 8.5 4.5 9.2 3.3C9.4 2.9 9.1 2.5 8.7 2.6C4.8 3.8 2 7.4 2 11.7C2 17 6.3 21.3 11.6 21.3C15.6 21.3 19.1 18.8 20.6 15.3C20.8 15.1 20.5 14.9 20.2 15.1Z" fill="url(#moon_fill)"/>
+<path d="M17.5 3.2L18 4.6L19.4 5.1L18 5.6L17.5 7L17 5.6L15.6 5.1L17 4.6L17.5 3.2Z" fill="url(#moon_star)"/>
+<path d="M21.2 8.6L21.5 9.4L22.3 9.7L21.5 10L21.2 10.8L20.9 10L20.1 9.7L20.9 9.4L21.2 8.6Z" fill="url(#moon_star)"/>
+<defs>
+<linearGradient id="moon_fill" x1="3" y1="3" x2="19" y2="21" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9C6CFE"/>
+<stop offset="1" stop-color="#2764E7"/>
+</linearGradient>
+<linearGradient id="moon_star" x1="15.6" y1="3.2" x2="22.3" y2="10.8" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE06B"/>
+<stop offset="1" stop-color="#FFB357"/>
+</linearGradient>
+</defs>
+</svg>

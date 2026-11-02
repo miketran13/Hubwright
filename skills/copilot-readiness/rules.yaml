@@ -1,0 +1,73 @@
+# Rules for copilot-readiness. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: copilot.assessment
+    title: "Content Management Assessment not run recently"
+    scope: tenant
+    when: "settings.daysSinceContentAssessment > $maxDays"
+    params: { maxDays: 30 }
+    severity: medium
+    basis: heuristic
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "to identify sites with oversized audiences, EEEU usage, broken inheritance, inappropriate sharing, and those that are inactive or ownerless"
+    reviewed: 2026-10-30
+    message: "The last Content Management Assessment was {settings.daysSinceContentAssessment} days ago."
+    fix: "SharePoint admin center > Advanced Management > Start assessment."
+
+  - id: copilot.rcd-high-risk
+    title: "High-risk site discoverable by Copilot"
+    scope: site
+    when: "isPublic and ownerCount == 0 and restrictedContentDiscovery != true"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "to exclude sensitive sites from Copilot discovery"
+    reviewed: 2026-10-30
+    message: "{title} is public, has no owner, and Restricted Content Discovery is off."
+    fix: "Assign owners and review access; meanwhile turn on Restrict content discovery for the site."
+
+  - id: copilot.unlabeled
+    title: "Sites without sensitivity labels"
+    scope: tenant
+    when: "siteCount > 0 and unlabeledSites / siteCount > $maxShare"
+    severity: medium
+    basis: documented
+    params: { maxShare: 0.5 }
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "to reflect data sensitivity and restrict oversharing"
+    reviewed: 2026-10-30
+    message: "{unlabeledSites} of {siteCount} sites have no sensitivity label."
+    fix: "Publish container sensitivity labels and apply them to sites."
+
+  - id: copilot.rac
+    title: "Use Restricted Access Control for sensitive sites"
+    kind: advisory
+    scope: tenant
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "by default for business-critical sites at provisioning time"
+    reviewed: 2026-10-30
+    fix: "Policies > Access control > Enable site access restriction, then restrict sensitive sites to a group."
+
+  - id: copilot.backup
+    title: "No backup and restore solution"
+    scope: tenant
+    when: "settings.backupEnabled == false"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/backup/backup-overview
+    quote: "you need to be able to get your business back to a healthy state as soon as possible"
+    reviewed: 2026-10-30
+    message: "Microsoft 365 Backup is not set up."
+    fix: "Microsoft 365 admin center > Settings > Microsoft 365 Backup."
+
+  - id: copilot.dag
+    title: "Review data access governance reports"
+    kind: advisory
+    scope: tenant
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "for high-risk sites so site owners can manage access"
+    reviewed: 2026-10-30
+    fix: "Reports > Data access governance: start with the site permissions baseline, EEEU and sharing links reports."

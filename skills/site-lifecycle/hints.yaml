@@ -1,0 +1,38 @@
+hints:
+  - id: lifecycle-policies
+    title: "Turn on the lifecycle policies"
+    what: "Inactive site, site ownership and site attestation policies, which ask owners to keep their sites current."
+    why: "Microsoft's recommended governance uses all three together, so abandoned sites are found and either renewed or archived."
+    how:
+      - "SharePoint admin center → Site lifecycle management."
+      - "Create the inactive site policy (the proposal's months), the ownership policy and the attestation policy."
+      - "Start in simulation mode, check the report, then turn them on."
+    example: "Inactive for 6 months → owners asked; no answer → read-only; then archive."
+    rules: [lifecycle.all-three, lifecycle.inactive-site]
+  - id: archive-site
+    title: "Archive a long-inactive site"
+    what: "Moves a site nobody uses to Microsoft 365 Archive, out of search and Copilot but recoverable."
+    why: "Old sites clutter search and keep stale content discoverable."
+    how:
+      - "Ask the owner first; Hubwright never archives anything."
+      - "Admin center → Active sites → the site → Archive (Microsoft 365 Archive must be on)."
+    example: "Project 23, untouched for 690 days, is archived after its owner confirms."
+    rules: [lifecycle.inactive-site, lifecycle.archive-off]
+  - id: retire-site
+    title: "Retire a site after its content moves"
+    what: "Ends a site that the new structure replaces, once its content lives elsewhere."
+    why: "Two places for the same content confuse people and search."
+    how:
+      - "Move the content that still matters into the new sites."
+      - "Make the old site read-only for a few weeks with a banner pointing to the new home."
+      - "Then archive or delete it."
+    example: "The classic Fabrikam Intranet root retires after its content moves to Fabrikam Home and the hubs."
+  - id: review-inactive
+    title: "Ask owners about quiet sites"
+    what: "Sites with no recent activity, whose owners confirm whether they are still needed."
+    why: "Some quiet sites are archives people still rely on; asking first avoids surprises."
+    how:
+      - "Send each owner the site and its last activity date."
+      - "Keep, archive or retire it based on the answer."
+    example: "Project 11 (330 days quiet): the owner keeps it as a reference."
+    rules: [lifecycle.inactive-site]

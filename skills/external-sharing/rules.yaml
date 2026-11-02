@@ -1,0 +1,81 @@
+# Rules for external-sharing. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: sharing.default-link
+    title: "Default link is Anyone"
+    scope: tenant
+    when: "settings.defaultLinkType == 'Anyone'"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "You can mitigate this risk by changing the default link setting to a link that only works for people inside your organization."
+    reviewed: 2026-10-27
+    message: "The share dialog preselects Anyone links."
+    fix: "SharePoint admin center > Policies > Sharing > File and folder links: Only people in your organization."
+
+  - id: sharing.anyone-expiry
+    title: "Anyone links never expire"
+    scope: tenant
+    when: "settings.sharingLevel == 'Anyone' and (settings.anyoneLinkExpirationDays == 0 or settings.anyoneLinkExpirationDays > $maxDays)"
+    severity: high
+    basis: documented
+    params: { maxDays: 90 }
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "To mitigate this possibility, you can configure an expiration time for Anyone links."
+    reviewed: 2026-10-27
+    message: "Anyone links expire after {settings.anyoneLinkExpirationDays} day(s) (0 = never)."
+    fix: "Policies > Sharing > These links must expire within this many days."
+
+  - id: sharing.anyone-edit
+    title: "Anyone links allow editing"
+    scope: tenant
+    when: "settings.sharingLevel == 'Anyone' and (settings.anyoneFileLinkPermission == 'Edit' or settings.anyoneFolderLinkPermission == 'Edit')"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "consider setting the file permissions to View and folder permissions to View or View and upload"
+    reviewed: 2026-10-27
+    message: "Anyone links can edit (files: {settings.anyoneFileLinkPermission}, folders: {settings.anyoneFolderLinkPermission})."
+    fix: "Set Anyone link permissions to View (files) and View or View and upload (folders)."
+
+  - id: sharing.most-permissive
+    title: "Tenant sharing at the most permissive level"
+    scope: tenant
+    when: "settings.sharingLevel == 'Anyone'"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot
+    quote: "Disable or restrict use of company-wide sharing groups and Anyone links at the tenant level."
+    reviewed: 2026-10-30
+    message: "Tenant sharing allows Anyone links."
+    fix: "Lower it to New and existing guests unless unauthenticated sharing is a real need."
+
+  - id: sharing.site-looser
+    title: "Site sharing looser than the tenant"
+    scope: site
+    when: "sharingLooserThanTenant"
+    severity: high
+    basis: heuristic
+    message: "{title} allows more sharing ({sharingLevel}) than the tenant."
+    fix: "SharePoint can't make a site looser than the tenant; re-read the settings, the snapshot may be stale."
+
+  - id: sharing.dlp
+    title: "Use DLP to block Anyone links on sensitive content"
+    kind: advisory
+    scope: tenant
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/best-practices-anonymous-sharing
+    quote: "You can use Microsoft Purview Data Loss Prevention (DLP) to prevent unauthenticated sharing of sensitive content."
+    reviewed: 2026-10-27
+    fix: "Create a DLP rule: Restrict access > Block only people who were given access through Anyone links."
+
+  - id: sharing.anyone-links-on-site
+    title: "Anyone links on a site"
+    scope: site
+    filter: "isPublic == false or isPublic == null"
+    when: "permissions.anyoneLinks > $max"
+    severity: medium
+    basis: heuristic
+    params: { max: 0 }
+    message: "{title} has {permissions.anyoneLinks} Anyone link(s)."
+    fix: "Review them in the site's sharing report; sensitive content plus Anyone links is a high-risk combination."

@@ -1,0 +1,6 @@
+questions:
+  - id: tpl.customize
+    text: "Will site owners start from Microsoft's site templates, or from templates your organization publishes?"
+    why: "Organization templates appear under 'From your organization' in Apply a site template and can set theme, lists and navigation for every new site."
+    choices: ["Microsoft's templates", "Our own templates", "Both"]
+    default: "Both"

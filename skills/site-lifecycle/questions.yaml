@@ -1,0 +1,6 @@
+questions:
+  - id: life.inactive
+    text: "What happens to a site nobody has used for a while?"
+    why: "The inactive site policy notifies owners, then can make the site read-only and archive it."
+    choices: ["Owners confirm, then read-only, then archive", "Owners confirm, then read-only", "Report only"]
+    default: "Owners confirm, then read-only, then archive"

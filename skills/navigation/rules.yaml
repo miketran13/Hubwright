@@ -1,0 +1,74 @@
+# Rules for navigation. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: nav.levels
+    title: "Navigation deeper than three levels"
+    scope: site
+    when: "navDepth > 3"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/plan-navigation-modern-experience
+    quote: "Both cascading and mega menus support up to three levels of navigation in your menu."
+    reviewed: 2026-10-27
+    message: "{title} navigation has {navDepth} levels."
+    fix: "Reduce to three levels; move detail onto navigation pages."
+
+  - id: nav.mega-two-levels
+    title: "Mega menu with only two levels"
+    scope: site
+    when: "menuStyle == 'Mega' and navDepth < 3 and navLinks > 0"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/plan-navigation-modern-experience
+    quote: "If you only need two levels in your menu, consider using the cascading style."
+    reviewed: 2026-10-27
+    message: "{title} uses a mega menu with {navDepth} level(s)."
+    fix: "Switch to the cascading style, or add a third level."
+
+  - id: nav.empty-labels
+    title: "Navigation labels with no links"
+    scope: site
+    when: "navEmptyLabels > 0"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/plan-navigation-modern-experience
+    quote: "A label should always have at least one link below."
+    reviewed: 2026-10-27
+    message: "{title} has {navEmptyLabels} label(s) with nothing under them."
+    fix: "Add links under each label or remove it."
+
+  - id: nav.default-links
+    title: "Out-of-the-box navigation still on a communication site"
+    scope: site
+    filter: "kind == 'Communication'"
+    when: "content.hasDefaultNavigation"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/plan-navigation-modern-experience
+    quote: "For communication sites, plan to delete the \"out of the box\" navigation when you're ready to launch"
+    reviewed: 2026-10-27
+    message: "{title} still shows the default Documents / Pages / Site contents links."
+    fix: "Replace them with links organised by subject or task."
+
+  - id: nav.document-links
+    title: "Navigation links straight to documents"
+    scope: site
+    when: "content.navLinksToDocuments > 0"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/plan-navigation-modern-experience
+    quote: "when navigation points to a page with an embedded document instead of directly to a document, you have an opportunity to provide context for the document and retain the navigational context for the site."
+    reviewed: 2026-10-27
+    message: "{title} has {content.navLinksToDocuments} navigation link(s) to documents."
+    fix: "Point the link at a page that embeds or links the document."
+
+  - id: nav.private-links
+    title: "Restricted links shown to everyone"
+    scope: site
+    when: "navRestrictedUntargeted > 0"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "If you add private sites to hub navigation, consider using audience targeting so that the link only appears for members of the private site."
+    reviewed: 2026-10-27
+    message: "{title} shows {navRestrictedUntargeted} restricted link(s) to everyone."
+    fix: "Enable audience targeting on the navigation and target the links."

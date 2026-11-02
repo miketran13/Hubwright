@@ -1,0 +1,277 @@
+# Site purposes and the design each gets. Hubwright's judgment (basis: heuristic): adjust them to your
+# organization in a user copy of this skill. sections use the vocabulary hero, news, events, quicklinks,
+# documents, people, text, gallery, faq, calendar, video, conversations, tasks. navigation are link
+# labels; the site owner creates the pages behind them.
+patterns:
+  - id: home
+    name: "Intranet home"
+    purpose: "The front door: company news, the top tasks and what's coming up, for everyone."
+    kind: communication
+    fallback: home
+    template: organization-home
+    sections: ["hero", "news", "quicklinks", "events", "text"]
+    navigation: []
+    headerLayout: standard
+    audience: "Everyone reads; the intranet team edits."
+    practices:
+      - "Lead with the stories and campaigns that matter this week (hero), then the news everyone should see."
+      - "Quick links hold the six to eight tasks people come to the intranet for, not a list of departments."
+      - "The home site's navigation is the global navigation in the app bar; keep it to the major categories."
+    note: "Hubwright's starting point for an intranet home site."
+  - id: hub
+    name: "Function hub"
+    purpose: "Brings together the news, services and sites of one function."
+    kind: communication
+    fallback: hub
+    template: department
+    sections: ["hero", "news", "quicklinks", "events", "documents"]
+    navigation: []
+    headerLayout: standard
+    audience: "Everyone reads; the function's communicators edit."
+    practices:
+      - "News on a hub rolls up the posts of its sites, so people follow one place for the function."
+      - "Quick links go to the function's services, not to its internal team sites."
+      - "The hub's navigation is built from the plan (Build the navigation step); keep it to three levels."
+    note: "Hubwright's starting point for hub home pages."
+  - id: department
+    name: "Department or service"
+    purpose: "What a department does, its news and how to reach it."
+    kind: communication
+    suggestFor: ["department", "finance", "legal", "facilities", "marketing", "sales", "operations", "procurement", "services", "office"]
+    template: department
+    sections: ["hero", "news", "quicklinks", "documents", "people"]
+    navigation: ["About us", "Services", "Forms", "News", "Contact us"]
+    headerLayout: standard
+    audience: "Everyone reads; the department's content owners edit."
+    practices:
+      - "Write for the people the department serves, not for the department itself."
+      - "Put the requests people make most (forms, services) in quick links at the top."
+      - "Name the contacts: a person to ask beats a shared mailbox alone."
+    note: "Hubwright's starting point for department sites."
+  - id: hr-services
+    name: "HR services"
+    purpose: "Benefits, pay, leave and policies for employees, and who to ask."
+    kind: communication
+    suggestFor: ["hr", "human resources", "people", "benefits", "pay", "payroll", "leave", "careers", "wellbeing", "compensation"]
+    template: human-resources
+    sections: ["hero", "quicklinks", "news", "faq", "people", "documents"]
+    navigation: ["Benefits", "Pay", "Leave", "Policies", "Careers", "Contact HR"]
+    headerLayout: standard
+    audience: "Everyone reads; HR edits. Keep personal cases out: they belong in HR's own private site."
+    practices:
+      - "People come to HR to do something: benefits, pay and leave go first, in quick links."
+      - "Answer the most common questions on the page (FAQ) before people raise a ticket."
+      - "Keep employee case files off this site; it is read by everyone."
+    note: "Hubwright's starting point for HR self-service sites."
+  - id: it-services
+    name: "IT services"
+    purpose: "How to get help, software and devices, and what's changing in IT."
+    kind: communication
+    suggestFor: ["it", "technology", "service desk", "support", "software", "devices", "digital", "tech"]
+    template: department
+    sections: ["quicklinks", "news", "faq", "documents", "people"]
+    navigation: ["Get help", "Software", "Devices", "Security", "Known issues"]
+    headerLayout: compact
+    audience: "Everyone reads; IT edits."
+    practices:
+      - "Get help is the first link: most visitors have a problem now."
+      - "Post outages and changes as news so they reach the home site and the Teams feed."
+      - "Self-help answers (FAQ, how-to documents) cut repeat tickets."
+    note: "Hubwright's starting point for IT self-service sites."
+  - id: it-help-desk-team
+    name: "IT help desk team"
+    purpose: "Where the help desk tracks requests and shares runbooks."
+    kind: teamGroup
+    suggestFor: ["help desk", "helpdesk", "service desk", "tickets", "runbooks", "it support"]
+    template: it-help-desk
+    sections: ["quicklinks", "tasks", "documents", "news"]
+    navigation: ["Requests", "Runbooks", "On call", "Documents"]
+    headerLayout: compact
+    audience: "Help desk members edit; nobody else needs access."
+    practices:
+      - "Runbooks live in one library with a column for the system, not in nested folders."
+      - "The user-facing IT site is separate: this one stays private to the team."
+    note: "Hubwright's starting point for an IT team's working site."
+  - id: policies
+    name: "Policies and procedures"
+    purpose: "The current version of every policy, who owns it and when it was reviewed."
+    kind: communication
+    suggestFor: ["policy", "policies", "procedures", "handbook", "compliance", "guidelines", "governance", "code of conduct"]
+    template: standard-communication
+    sections: ["text", "quicklinks", "documents", "faq"]
+    navigation: ["All policies", "By topic", "Recently updated", "Ask a question"]
+    headerLayout: minimal
+    audience: "Everyone reads; policy owners edit, with approval."
+    practices:
+      - "One current version of each policy, with its owner and review date as columns."
+      - "Group policies by topic people recognise (travel, expenses, security), not by department."
+      - "Retire old versions instead of keeping them beside the current one."
+    note: "Hubwright's starting point for policy libraries."
+  - id: newsroom
+    name: "Newsroom"
+    purpose: "Company news and announcements, published by the communications team."
+    kind: communication
+    suggestFor: ["news", "newsroom", "announcements", "communications", "comms", "stories", "updates"]
+    template: standard-communication
+    sections: ["hero", "news", "events", "video"]
+    navigation: ["Latest", "Announcements", "Events", "Submit a story"]
+    headerLayout: extended
+    audience: "Everyone reads; communicators publish."
+    practices:
+      - "Make it an organization news site so its posts are marked as official."
+      - "Use the hero for the two or three stories of the week; let news roll up the rest."
+    note: "Hubwright's starting point for a news site."
+  - id: onboarding
+    name: "Onboarding"
+    purpose: "Everything a new starter needs in their first weeks."
+    kind: communication
+    suggestFor: ["onboarding", "new hire", "new starter", "new joiner", "induction", "orientation", "welcome"]
+    template: new-employee-onboarding
+    sections: ["hero", "text", "quicklinks", "events", "people", "faq"]
+    navigation: ["Before you start", "Your first day", "Your first month", "Who's who", "FAQ"]
+    headerLayout: standard
+    audience: "Everyone reads; HR and managers edit."
+    practices:
+      - "Order the page by time: before day one, the first day, the first month."
+      - "Introduce the people a new starter will meet, with their faces."
+    note: "Hubwright's starting point for onboarding sites."
+  - id: learning
+    name: "Learning"
+    purpose: "Courses, learning paths and upcoming sessions."
+    kind: communication
+    suggestFor: ["learning", "training", "academy", "courses", "development", "skills", "education"]
+    template: learning-central
+    sections: ["hero", "quicklinks", "events", "news", "documents"]
+    navigation: ["Courses", "Learning paths", "Sessions", "Request training"]
+    headerLayout: standard
+    audience: "Everyone reads; the learning team edits."
+    practices:
+      - "Upcoming sessions near the top: they have a date and get missed otherwise."
+      - "Group courses by role or skill, the way people look for them."
+    note: "Hubwright's starting point for learning sites."
+  - id: event
+    name: "Event"
+    purpose: "One event: agenda, speakers, how to join."
+    kind: communication
+    suggestFor: ["event", "events", "conference", "summit", "offsite", "kickoff", "festival"]
+    template: event
+    sections: ["hero", "text", "calendar", "people", "faq"]
+    navigation: ["Agenda", "Speakers", "Venue", "FAQ"]
+    headerLayout: extended
+    audience: "Everyone reads; the organisers edit. Archive it after the event."
+    practices:
+      - "Date, place and how to join belong in the first screen."
+      - "Plan the end: archive the site once the event and its follow-up are done."
+    note: "Hubwright's starting point for event sites."
+  - id: leadership
+    name: "Leadership"
+    purpose: "Messages from leadership, town halls and the strategy."
+    kind: communication
+    suggestFor: ["leadership", "ceo", "executive", "executives", "town hall", "strategy", "board"]
+    template: leadership-connection
+    sections: ["hero", "news", "video", "events", "conversations"]
+    navigation: ["Messages", "Town halls", "Strategy", "Ask leadership"]
+    headerLayout: extended
+    audience: "Everyone reads; leadership's communicators edit."
+    practices:
+      - "Video and town hall recordings make leadership visible; keep them current."
+      - "Give people a way to ask a question, and answer it on the site."
+    note: "Hubwright's starting point for leadership sites."
+  - id: crisis
+    name: "Crisis and continuity"
+    purpose: "What is happening, what to do and where to get help during an incident."
+    kind: communication
+    suggestFor: ["crisis", "emergency", "incident", "business continuity", "continuity", "safety"]
+    template: crisis-management
+    sections: ["hero", "news", "quicklinks", "faq"]
+    navigation: ["Latest updates", "What to do", "Get help", "FAQ"]
+    headerLayout: compact
+    audience: "Everyone reads; the response team publishes."
+    practices:
+      - "The latest update and what to do now sit at the top, with the time they were posted."
+      - "Prepare it before you need it: an empty crisis site is ready in minutes."
+    note: "Hubwright's starting point for crisis sites."
+  - id: location
+    name: "Location"
+    purpose: "One office or region: local news, events, facilities and people."
+    kind: communication
+    suggestFor: ["location", "locations", "region", "campus", "country", "city", "site office"]
+    template: department
+    sections: ["hero", "news", "events", "quicklinks", "people"]
+    navigation: ["Local news", "Events", "Facilities", "Getting here", "Contacts"]
+    headerLayout: standard
+    audience: "Everyone reads; local communicators edit."
+    practices:
+      - "Local news and events first: that is what a location site adds to the home site."
+      - "Locations are sites in a Locations hub, not hubs of their own."
+    note: "Hubwright's starting point for location sites."
+  - id: brand
+    name: "Brand and templates"
+    purpose: "The approved logos, colours, images and document templates, and how to use them."
+    kind: communication
+    suggestFor: ["brand", "branding", "brand assets", "logo", "logos", "templates", "visual identity", "style guide"]
+    template: brand-central
+    sections: ["hero", "text", "documents", "gallery", "quicklinks"]
+    navigation: ["Brand guidelines", "Logos", "Templates", "Images", "Ask the brand team"]
+    headerLayout: standard
+    audience: "Everyone reads; the brand team edits."
+    practices:
+      - "One current version of each asset, so nobody copies an old logo from an email."
+      - "Say how to use each asset next to the download, not in a separate guide."
+    note: "Hubwright's starting point for brand asset sites."
+  - id: community
+    name: "Community"
+    purpose: "A community of practice or interest: its conversations, events and people."
+    kind: communication
+    suggestFor: ["community", "communities", "network", "club", "guild", "practice", "employee resource group"]
+    template: standard-communication
+    sections: ["text", "news", "events", "conversations", "people"]
+    navigation: ["About", "Events", "Resources", "Join"]
+    headerLayout: standard
+    audience: "Everyone reads; community leads edit."
+    practices:
+      - "Say who the community is for and how to join in the first section."
+      - "Conversations live in Viva Engage or Teams; the site points to them."
+    note: "Hubwright's starting point for community sites."
+  - id: communication-general
+    name: "General communication site"
+    purpose: "Information for a wide audience, published by a few."
+    kind: communication
+    fallback: communication
+    template: standard-communication
+    sections: ["hero", "news", "quicklinks", "documents"]
+    navigation: ["About", "News", "Resources", "Contact"]
+    headerLayout: standard
+    audience: "Many read; a few edit."
+    practices:
+      - "Put what most visitors need at the top of the page, with the summary first."
+      - "Say on the page who the site is for and who to contact."
+    note: "Hubwright's general starting point when a site's purpose isn't clear: confirm it."
+  - id: project-team
+    name: "Project team"
+    purpose: "Where a project team plans, shares files and decides."
+    kind: teamGroup
+    suggestFor: ["project", "projects", "programme", "program", "initiative", "workstream", "pmo", "launch"]
+    template: project-management
+    sections: ["quicklinks", "news", "tasks", "documents", "calendar"]
+    navigation: ["Plan", "Documents", "Decisions", "Meetings"]
+    headerLayout: compact
+    audience: "Project members edit; share read access with stakeholders only."
+    practices:
+      - "One site per project, archived when it ends: no project subsites."
+      - "Keep decisions in a list with a date and an owner, so they can be found later."
+    note: "Hubwright's starting point for project sites."
+  - id: team-collaboration
+    name: "Team workspace"
+    purpose: "Where a team works together: files, conversations, plans."
+    kind: teamGroup
+    fallback: team
+    template: standard-team
+    sections: ["news", "documents", "conversations", "quicklinks"]
+    navigation: ["Documents", "Notebook", "Planner", "Teams"]
+    headerLayout: compact
+    audience: "Members edit; nobody outside the team needs access."
+    practices:
+      - "Team sites are for the team; information for others belongs on a communication site."
+      - "A few topic libraries with columns beat one library of nested folders."
+    note: "Hubwright's general starting point for team sites: confirm the purpose."

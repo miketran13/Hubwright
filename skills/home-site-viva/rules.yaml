@@ -1,0 +1,49 @@
+# Rules for home-site-viva. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: home.missing
+    title: "No home site"
+    scope: tenant
+    when: "homeSiteSet == false"
+    severity: high
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "You need to have a home site to enable global navigation."
+    reviewed: 2026-10-27
+    message: "The tenant has no home site, so there is no global navigation."
+    fix: "Pick (or build) a communication site and set it as the home site in the SharePoint admin center."
+
+  - id: home.global-nav-empty
+    title: "Home site without global navigation"
+    scope: tenant
+    when: "homeSiteSet and globalNavLinks == 0"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "Global navigation is enabled with the SharePoint app bar on your home site."
+    reviewed: 2026-10-27
+    message: "A home site is set but global navigation has no links."
+    fix: "Configure global navigation in the app bar: Home, News, your hubs, key tools."
+
+  - id: home.hubs-in-global-nav
+    title: "Hubs missing from global navigation"
+    scope: tenant
+    when: "hubCount > 1 and globalNavLinks > 0 and hubsInGlobalNav < hubCount"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Add your hubs to the global navigation for your tenant in the SharePoint app bar."
+    reviewed: 2026-10-27
+    message: "{hubsInGlobalNav} of {hubCount} hubs are linked from global navigation."
+    fix: "Add the missing hubs to global navigation."
+
+  - id: home.hub-with-many-hubs
+    title: "Home site is a hub while there are several hubs"
+    scope: tenant
+    when: "homeSiteIsHub and hubCount > 2"
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites
+    quote: "Consider leaving your home site as a \"regular\" site if you plan to have multiple hubs and you want your users to leverage the SharePoint app bar for global navigation."
+    reviewed: 2026-10-27
+    message: "The home site is a hub and there are {hubCount} hubs."
+    fix: "Decide deliberately; with many hubs, the app bar usually serves global navigation better."

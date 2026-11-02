@@ -1,0 +1,11 @@
+hints:
+  - id: sensitivity-labels
+    title: "Label every site"
+    what: "A sensitivity label on each site (General, Confidential, Partner) that sets its sharing and access rules."
+    why: "Unlabeled sites are a Copilot readiness gap; labels make the site's sensitivity visible and enforce its controls."
+    how:
+      - "Microsoft Purview → Information protection: publish container labels."
+      - "Set each site's label (admin center → Active sites → the site → Settings → Sensitivity)."
+      - "New sites get their label when they are created."
+    example: "HR Team: Confidential. HR – Benefits: General. Partner portal: Partner."
+    rules: [copilot.unlabeled]

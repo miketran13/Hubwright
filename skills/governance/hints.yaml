@@ -1,0 +1,9 @@
+hints:
+  - id: rescan
+    title: "Scan again and compare"
+    what: "A new snapshot after the work, compared with the one before."
+    why: "The scores and findings show what the implementation actually changed, and what still needs attention."
+    how:
+      - "Connection → Scan now."
+      - "History → compare the latest two snapshots."
+    example: "Score 45 → 82 after phase 2; the remaining findings are content clean-up."

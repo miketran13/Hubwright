@@ -1,0 +1,73 @@
+hints:
+  - id: baseline-sharing
+    title: "Set the sharing ceiling"
+    what: "The most open sharing any site can use, from Anyone links down to only people in the organization."
+    why: "SharePoint's default is the most permissive level; every site inherits the tenant's ceiling."
+    how:
+      - "Pick the profile that matches how you work with partners."
+      - "Hubwright reads the level, records it, and sets it with Graph after you confirm."
+    example: "Standard: new and existing guests, who must sign in or enter a code."
+    rules: [sharing.most-permissive]
+  - id: baseline-links
+    title: "Make the safe link the default"
+    what: "The link type and permission a share starts with, and how long and how far Anyone links reach."
+    why: "Most people keep the default link; a safe default prevents accidental public sharing."
+    how:
+      - "Hubwright reads each value with Get-PnPTenant, records it, and sets it with Set-PnPTenant."
+      - "A shorter expiry that is already in place is kept."
+    example: "Default: people in the organization, View. Anyone links (if ever allowed): view-only, expire in 30 days."
+    rules: [sharing.default-link, sharing.anyone-expiry, sharing.anyone-edit]
+  - id: baseline-guests
+    title: "Keep guest access deliberate"
+    what: "Guest access that expires, can't be forwarded, and can't be reshared by the guest."
+    why: "Guests stay long after the project ends unless access expires; owners renew who they still need."
+    how:
+      - "Hubwright turns on expiry first, then sets the number of days."
+      - "Graph settings: guests can't reshare, and must sign in with the invited account."
+    example: "Standard: guest access expires after 90 days; site owners get a notice to extend it."
+  - id: baseline-sessions
+    title: "Close the old doors"
+    what: "Legacy authentication, idle browser sessions and custom script."
+    why: "Legacy protocols skip multifactor authentication; idle sessions on shared PCs stay signed in."
+    how:
+      - "Graph settings for legacy authentication and idle sign-out."
+      - "Custom script is a guided step in the admin center."
+    example: "Strict: users get a warning after 45 minutes of inactivity and are signed out after 60."
+  - id: baseline-devices
+    title: "Unmanaged devices"
+    what: "Web-only or no access from devices your organization doesn't manage."
+    why: "Downloads to personal devices leave your control."
+    how:
+      - "A guided step: it creates a Conditional Access policy for all users, so pilot it first."
+    example: "Strict: personal laptops get web-only access, no downloads or sync."
+  - id: baseline-labels
+    title: "Labels and DLP"
+    what: "Sensitivity labels on sites and DLP policies for sensitive content."
+    why: "Labels carry the rules with the site; DLP stops sensitive content leaving even when sharing is allowed."
+    how:
+      - "Guided steps in Microsoft Purview."
+    example: "Regulated: every new site gets the 'Internal' label by default."
+    rules: [copilot.unlabeled, sharing.dlp]
+  - id: baseline-sam
+    title: "Find and fix oversharing"
+    what: "SharePoint Advanced Management: access governance reports and restricted access control."
+    why: "Copilot finds whatever people can open; fix oversharing before it surfaces in answers."
+    how:
+      - "Guided steps in the SharePoint admin center (needs SharePoint Advanced Management)."
+    example: "Run the 'Everyone except external users' report; restrict the HR site to the HR group."
+    rules: [copilot.dag, copilot.rac]
+  - id: baseline-lifecycle
+    title: "Lifecycle and recovery"
+    what: "Inactive-site and ownership policies, and backup."
+    why: "Sites without owners or activity keep stale permissions; backup lets you recover from ransomware or mistakes."
+    how:
+      - "Guided steps in the SharePoint and Microsoft 365 admin centers."
+    example: "Inactive sites: owners confirm after six months, or the site becomes read-only and is archived."
+    rules: [lifecycle.all-three, lifecycle.ownerless-many, copilot.backup]
+  - id: baseline-restore
+    title: "Put a setting back"
+    what: "Sets a tenant setting back to the value Hubwright recorded before it changed it."
+    why: "Every change should be reversible without guessing what it was before."
+    how:
+      - "Hubwright reads the current value, then sets the recorded one after you confirm."
+    example: "Default link was Anyone before the baseline; Restore sets it to Anyone again."

@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hubwright.Runtime/Hubwright.Runtime.csproj" />
+    <Project Path="src/Hubwright.Core/Hubwright.Core.csproj" />
+    <Project Path="src/Hubwright.Skills/Hubwright.Skills.csproj" />
+    <Project Path="src/Hubwright.Connectors/Hubwright.Connectors.csproj" />
+    <Project Path="src/Hubwright.Agents/Hubwright.Agents.csproj" />
+    <Project Path="src/Hubwright.Engine/Hubwright.Engine.csproj" />
+    <Project Path="src/Hubwright.Cli/Hubwright.Cli.csproj" />
+    <Project Path="src/Hubwright.Desktop/Hubwright.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hubwright.Tests/Hubwright.Tests.csproj" />
+  </Folder>
+</Solution>

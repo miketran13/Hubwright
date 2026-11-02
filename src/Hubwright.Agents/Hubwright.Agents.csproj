@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Hubwright</RootNamespace>
+    <Description>The AI layer: roles (assessor, architect, brand designer, governance advisor, assistant), the read-only tool catalog over the workspace, and the runner that gives tools to API backends in-process and to the CLIs over MCP.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Hubwright.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hubwright.Connectors\Hubwright.Connectors.csproj" />
+  </ItemGroup>
+
+</Project>

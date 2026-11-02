@@ -1,0 +1,32 @@
+hints:
+  - id: create-site
+    title: "Create a site"
+    what: "A new modern site: a communication site to publish to many people, or a team site to work together."
+    why: "Modern information architecture uses one site per unit of work, connected by hubs, instead of subsites."
+    how:
+      - "Hubwright creates it (SPSiteManager/create) at the planned URL with the planned title."
+      - "Standard communication, Showcase and Blank are applied at creation; other templates follow as a guided step."
+      - "Add at least two owners, then content."
+    example: "https://contoso.sharepoint.com/sites/hr-benefits, \"HR – Benefits\", a communication site that joins HR Hub."
+    rules: [ia.subsites]
+  - id: flatten-subsites
+    title: "Turn subsites into sites"
+    what: "Moves each subsite that still matters into its own site, associated with the right hub."
+    why: "Subsites aren't recommended in modern SharePoint; flat sites can be moved between hubs, shared and archived on their own."
+    how:
+      - "List the subsites and ask owners which still matter."
+      - "Create a site for each, move the content (pages, libraries), associate it with the hub."
+      - "Delete the old subsite once nobody uses it. Hubwright never deletes."
+    example: "Intranet/HR/Benefits becomes https://contoso.sharepoint.com/sites/hr-benefits in HR Hub."
+    rules: [ia.subsites, ia.subsites-tenant]
+  - id: multilingual
+    title: "Multilingual sites"
+    what: "Translation of the home site and hubs into the organization's other languages."
+    why: "People find and trust content in their own language; navigation and titles follow each person's language."
+    how:
+      - "Site settings → Language settings → enable translation; add languages and translators."
+      - "Translate the navigation, then the most-read pages and news."
+    example: "Contoso: English source; German and French translations for the home site and the HR hub."
+    source: https://support.microsoft.com/en-us/office/create-multilingual-communication-sites-pages-and-news-2bb7d610-5453-41c6-a0e8-6f40b3ed750c
+    quote: "User interface elements like site navigation, site title, and site description can be shown in the user's preferred language"
+    reviewed: 2026-10-30

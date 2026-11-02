@@ -1,0 +1,13 @@
+questions:
+  - id: gov.owner
+    text: "Who is the organization intranet owner?"
+    why: "Microsoft's IA guidance starts with the intranet owners who set global and hub navigation."
+  - id: gov.naming
+    text: "What naming convention will sites and hubs use?"
+    why: "Consistent hub names make hubs discoverable in search and navigation."
+  - id: gov.guests
+    text: "Who may invite guests, and how long should guest access last?"
+    why: "Drives the tenant sharing level and guest expiration."
+  - id: gov.training
+    text: "How will site owners be trained?"
+    why: "Owners carry permissions, content freshness and lifecycle attestations."

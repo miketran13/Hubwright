@@ -1,0 +1,25 @@
+# winget manifest template (singleton). Before submitting to microsoft/winget-pkgs:
+# - replace <VERSION>, <OWNER> and <SHA256> (from SHA256SUMS.txt in the GitHub release);
+# - check it with `winget validate` and try it with `winget install --manifest .`.
+# The zip holds Hubwright.Desktop.exe and hubwright.exe side by side; winget adds `hubwright` to PATH.
+PackageIdentifier: Hubwright.Hubwright
+PackageVersion: <VERSION>
+PackageLocale: en-US
+Publisher: Hubwright contributors
+PackageName: Hubwright
+License: MIT
+ShortDescription: Plan, build, secure and run your SharePoint intranet, the way Microsoft recommends.
+Tags: [sharepoint, intranet, microsoft-365, governance]
+Installers:
+  - Architecture: x64
+    InstallerType: zip
+    NestedInstallerType: portable
+    NestedInstallerFiles:
+      - RelativeFilePath: Hubwright-win-x64\hubwright.exe
+        PortableCommandAlias: hubwright
+      - RelativeFilePath: Hubwright-win-x64\Hubwright.Desktop.exe
+        PortableCommandAlias: hubwright-desktop
+    InstallerUrl: https://github.com/<OWNER>/hubwright/releases/download/v<VERSION>/Hubwright-win-x64.zip
+    InstallerSha256: <SHA256>
+ManifestType: singleton
+ManifestVersion: 1.6.0

@@ -1,0 +1,13 @@
+# Rules for search. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: search.answers
+    title: "No search answers configured"
+    scope: tenant
+    when: "coalesce(settings.searchBookmarks, 0) + coalesce(settings.searchAcronyms, 0) == 0 and known(settings.searchBookmarks)"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "You can help users discover content and improve search outcomes by using several features in search, including acronyms, bookmarks, Q&A, floor plans, and locations."
+    reviewed: 2026-10-27
+    message: "Microsoft Search has no bookmarks or acronyms."
+    fix: "Microsoft 365 admin center > Search & intelligence > Answers."

@@ -1,0 +1,50 @@
+hints:
+  - id: home-site
+    title: "Set the home site and global navigation"
+    what: "The intranet's front door, and the global navigation shown in the SharePoint app bar on every site."
+    why: "Global navigation needs a home site; with several hubs, the app bar (not a hub) connects them."
+    how:
+      - "SharePoint admin center → Settings → Home site → the new home site's URL."
+      - "On the home site: Settings → Global navigation → Enable → add the links listed in the step."
+      - "Keep it to a handful of task-based links; put each hub under one label."
+    example: "Home · News · Working here (HR, IT, Finance, Communications, Locations) · Policies · Tools."
+    rules: [home.missing, home.global-nav-empty, home.hubs-in-global-nav]
+  - id: org-news
+    title: "Organization news sites"
+    what: "Sites whose news is official for the whole organization, styled as such and shown on the SharePoint start page."
+    why: "People trust and find news from a few named sources; hubs are where departments publish."
+    how:
+      - "Hubwright adds each hub with Add-PnPOrgNewsSite (as a SharePoint Administrator), after checking the list."
+      - "The home site is an organization news site already."
+    example: "Contoso: the home site plus the HR, IT and Communications hubs."
+    source: https://learn.microsoft.com/en-us/sharepoint/organization-news-site
+    quote: "mark them as organization news sites"
+    reviewed: 2026-10-30
+  - id: starter-content
+    title: "Draft welcome posts"
+    what: "A draft news post called Welcome on the home site and each hub, with sample text marked as such."
+    why: "An empty site at launch is a dead end; owners write faster from an example. Drafts are never published by Hubwright."
+    how:
+      - "Hubwright adds the draft with Add-PnPPage and Add-PnPPageTextPart; a page called Welcome that exists is left alone."
+      - "The owner rewrites the text and publishes."
+    example: "HR hub: 'Welcome to HR: benefits, leave and the people who can help.'"
+  - id: page-templates
+    title: "News and page templates"
+    what: "Templates that owners start from, so every hub's news and pages look and read alike."
+    why: "Consistent pages are easier to scan; owners don't start from a blank page."
+    how:
+      - "Finish the Welcome draft's layout, then Save as template."
+      - "Add one template for standard pages (policies, team pages)."
+    example: "HR: a 'Policy update' news template with summary, effective date and contact."
+  - id: teams-dashboard
+    title: "The SharePoint app in Teams"
+    what: "The dashboard, resources and feed in Teams, built from the home site."
+    why: "Many people live in Teams; the dashboard brings the top tasks and news to them, targeted by role."
+    how:
+      - "Edit the dashboard in the SharePoint app in Teams; add cards for the top tasks."
+      - "Target cards by role or region; pin the app for everyone."
+    example: "Cards: Leave balance, IT help, Shift schedule (frontline only), Expense claims."
+    source: https://learn.microsoft.com/en-us/sharepoint/homesites/create-dashboard
+    quote: "Content on the dashboard can be customized and then targeted to users in specific roles, markets, and job functions."
+    reviewed: 2026-10-30
+    rules: [home.missing]

@@ -1,0 +1,6 @@
+questions:
+  - id: home.viva
+    text: "Will the intranet also appear in Teams through Viva Connections?"
+    why: "Viva Connections uses the home site and its global navigation."
+    choices: ["Yes", "Later", "No"]
+    default: "Later"

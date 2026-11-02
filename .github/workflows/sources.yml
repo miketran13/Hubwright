@@ -1,0 +1,21 @@
+name: sources
+# Microsoft rewrites and retires pages. Every Monday, check that each documented rule, template,
+# hint and baseline setting still quotes its source word for word; fail (and so notify) if not.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build src/Hubwright.Cli -c Release
+      - name: Check every quote against its live page
+        run: dotnet src/Hubwright.Cli/bin/Release/net10.0/hubwright.dll skills refresh --strict
+        env:
+          HUBWRIGHT_HOME: ${{ runner.temp }}/hubwright

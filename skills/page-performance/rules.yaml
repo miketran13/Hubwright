@@ -1,0 +1,43 @@
+# Rules for page-performance. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: perf.run-diagnostics
+    title: "Run Page Diagnostics on portal pages"
+    kind: advisory
+    scope: tenant
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/enterprise/page-diagnostics-for-spo
+    quote: "SharePoint administrators and designers can use the tool to troubleshoot performance issues and to ensure that new pages are optimized prior to publishing."
+    reviewed: 2026-10-27
+    fix: "Install the extension for Edge or Chrome and run it on the home site and every hub home page."
+
+  - id: perf.web-parts
+    title: "Heavy home page"
+    scope: site
+    filter: "isHub or isHomeSite"
+    when: "content.homePageWebParts > $max"
+    severity: low
+    basis: heuristic
+    params: { max: 20 }
+    message: "{title} home page has {content.homePageWebParts} web parts."
+    fix: "Remove what readers don't use; run Page Diagnostics."
+
+  - id: perf.images
+    title: "Large images on the home page"
+    scope: site
+    when: "content.homePageImagesOver300Kb > 0"
+    severity: low
+    basis: heuristic
+    message: "{title} home page has {content.homePageImagesOver300Kb} image(s) over 300 KB."
+    fix: "Resize and compress images before uploading."
+
+  - id: perf.publishing-cdn
+    title: "Publishing enabled for a CDN"
+    kind: advisory
+    scope: site
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/microsoft-365/enterprise/page-diagnostics-for-spo
+    quote: "The additional functionality of the SharePoint publishing feature can increase page load times, so it should not be enabled just to allow CDN functionality."
+    reviewed: 2026-10-27
+    fix: "Keep publishing off on modern sites; modern pages use the CDN without it."

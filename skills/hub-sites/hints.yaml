@@ -1,0 +1,77 @@
+hints:
+  - id: register-hub
+    title: "Register a hub"
+    what: "Turns a communication site into a hub, so other sites can join it and share its navigation, theme, news and search scope."
+    why: "A hub gives one function (HR, IT, Finance) a family of sites people can browse as one, instead of a tree of subsites. Keep hub nesting shallow and the hub navigation short."
+    how:
+      - "Create the hub's site first (a communication site works best as the front page of the family)."
+      - "Register it as a hub (Hubwright calls RegisterHubSite), then give it a name that follows your convention."
+      - "Associate the function's sites with it and build its navigation."
+    example: "Contoso registers https://contoso.sharepoint.com/sites/hr-hub as \"HR Hub\"; Benefits, Pay and Learning join it and share one menu."
+    rules: [hubs.depth, hubs.nav-sites, hubs.theme-only]
+  - id: rename-hub
+    title: "Rename a hub to the naming convention"
+    what: "Changes the hub's display name in hub navigation and search; the site's URL stays the same."
+    why: "When every hub follows one pattern, people recognise hubs in search and navigation."
+    how:
+      - "Pick the convention once (the proposal uses \"<Function> Hub\")."
+      - "Rename each existing hub (Hubwright updates the hub's Title)."
+      - "Tell the hub's owners; links and bookmarks keep working because the URL doesn't change."
+    example: "\"Sales Portal\" becomes \"Sales Hub\"; https://contoso.sharepoint.com/sites/sales keeps working."
+    rules: [hubs.naming]
+  - id: associate-with-hub
+    title: "Associate a site with a hub"
+    what: "Joins a site to a hub's family; it takes the hub's navigation and theme, and its news and content roll up to the hub."
+    why: "Sites in no hub are hard to find. Associating keeps sites flat (no subsites) while still grouping them by function."
+    how:
+      - "Check the site belongs to the hub's function (its owner agrees)."
+      - "Associate it (Hubwright calls JoinHubSite with the hub's id)."
+      - "Add it to the hub navigation if people should find it there; private sites get audience targeting."
+    example: "\"HR – Benefits\" joins HR Hub; it now shows the HR menu and its news appears on the HR Hub home page."
+    rules: [ia.orphan-sites, hubs.nav-sites]
+  - id: unregister-hub
+    title: "Turn a hub back into a site"
+    what: "Removes a site's hub role; sites associated with it lose its navigation until they join another hub."
+    why: "Hubs for places or for themes only, or hubs nested too deep, make the structure harder to use. A place fits better as a site in a Locations hub."
+    how:
+      - "First decide where its associated sites go."
+      - "SharePoint admin center → Active sites → select the site → Hub → Unregister as hub site."
+      - "Associate it, and its former sites, with their target hub."
+    example: "\"EMEA sales\" stops being a hub and becomes \"EMEA Office\" in Locations Hub, removing a fourth level of hub nesting."
+    rules: [hubs.depth, hubs.theme-only]
+  - id: keep-extranet-out
+    title: "Keep extranets out of hubs"
+    what: "Takes a site shared with partners or guests out of its hub."
+    why: "Associated sites show the hub's navigation, so guests on an extranet would see links to internal sites."
+    how:
+      - "Disassociate the extranet (Hubwright calls JoinHubSite with the empty id)."
+      - "If internal users need it, add a link to it in the hub navigation instead."
+    example: "\"Partner portal\" leaves the intranet hub; internal staff still reach it from a \"Partners\" link in the hub menu."
+    rules: [hubs.extranet]
+  - id: hub-navigation
+    title: "Build a hub's navigation"
+    what: "The menu every site in the hub shows: links to the hub's sites and key pages, grouped under labels."
+    why: "Short, task-based navigation is easier to use; Microsoft recommends limits on links and levels, and labels that always lead somewhere."
+    how:
+      - "On the hub site, select Edit next to the hub navigation."
+      - "Add the links listed in the step; group more than about six under labels (a mega menu shows three levels)."
+      - "Turn on audience targeting for links to private sites."
+    example: "HR Hub: Home · Services (Benefits, Pay and compensation, Learning) · New starters · HR Team (members only)."
+    rules: [hubs.nav-sites, nav.levels, nav.empty-labels, hubs.private-links]
+  - id: choose-hub
+    title: "Choose a hub for a site"
+    what: "A site whose name doesn't say which function it belongs to; its owner decides."
+    why: "Every shared service should sit in the hub people expect, or it won't be found."
+    how:
+      - "Ask the owner which function owns the content."
+      - "Associate it with that hub, or keep it outside if it is a one-off team space."
+    example: "\"Project 3\" belongs to Finance, so it joins Finance Hub."
+    rules: [ia.orphan-sites]
+  - id: audience-targeting
+    title: "Audience-targeted navigation"
+    what: "Links to private sites appear only for the people who can open them."
+    why: "A link that ends in 'access denied' wastes time and erodes trust in the navigation."
+    how:
+      - "Turn on audience targeting in the hub navigation, then set each private site's link to its members group."
+    example: "HR hub: 'HR team' shows only to HR team members."
+    rules: [hubs.private-links, nav.private-links]

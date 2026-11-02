@@ -1,0 +1,64 @@
+# Rules for site-lifecycle. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: lifecycle.all-three
+    title: "Not all three lifecycle policy types in use"
+    scope: tenant
+    when: "settings.inactiveSitePolicies == 0 or settings.siteOwnershipPolicies == 0 or settings.siteAttestationPolicies == 0"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/site-lifecycle-management
+    quote: "Many organizations achieve the best results by combining all three policy types:"
+    reviewed: 2026-10-27
+    message: "Lifecycle policies: inactive {settings.inactiveSitePolicies}, ownership {settings.siteOwnershipPolicies}, attestation {settings.siteAttestationPolicies}."
+    fix: "SharePoint admin center > Policies > Site lifecycle management: create the missing policy types."
+
+  - id: lifecycle.inactive-site
+    title: "Inactive site"
+    scope: site
+    filter: "isHomeSite == false and lockState == 'Unlocked'"
+    when: "daysSinceActivity >= $inactiveDays"
+    severity: low
+    basis: documented
+    params: { inactiveDays: 180 }
+    source: https://learn.microsoft.com/en-us/sharepoint/inactive-site-policy
+    quote: "The policy execution report lists sites that are inactive for six months."
+    reviewed: 2026-10-27
+    message: "{title}: no activity for {daysSinceActivity} days."
+    fix: "Ask the owners to certify it, or make it read-only and archive it."
+
+  - id: lifecycle.archive-off
+    title: "Microsoft 365 Archive not enabled"
+    scope: tenant
+    when: "settings.microsoft365ArchiveEnabled == false"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/inactive-site-policy
+    quote: "Microsoft 365 Archive must be enabled in the Microsoft 365 admin center."
+    reviewed: 2026-10-27
+    message: "Archive enforcement isn't available without Microsoft 365 Archive."
+    fix: "Enable Microsoft 365 Archive in the Microsoft 365 admin center."
+
+  - id: lifecycle.ownerless-many
+    title: "Ownerless sites"
+    scope: tenant
+    when: "ownerlessSites > 0"
+    severity: medium
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/site-lifecycle-management
+    quote: "Site ownership policies help reduce the risk of ownerless sites and improve administrative continuity when users change roles or leave the organization."
+    reviewed: 2026-10-27
+    message: "{ownerlessSites} site(s) have no owner."
+    fix: "Create a site ownership policy with a minimum of two owners."
+
+  - id: lifecycle.storage
+    title: "Tenant storage nearly full"
+    scope: tenant
+    when: "storageUsedPercent >= $warnPercent"
+    severity: high
+    basis: documented
+    params: { warnPercent: 90 }
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "If your tenant continues to operate above your storage limits, you are at a risk of your environment being put into 'read-only' mode."
+    reviewed: 2026-10-27
+    message: "Storage is {storageUsedPercent}% used."
+    fix: "Archive inactive sites, empty recycle bins, trim versions, or buy storage."

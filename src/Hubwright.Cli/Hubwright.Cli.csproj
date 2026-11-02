@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>hubwright</AssemblyName>
+    <RootNamespace>Hubwright</RootNamespace>
+    <Description>The hubwright command line: scan, assess, blueprint, theme, preview, skills, proposals, chat and the MCP server.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hubwright.Engine\Hubwright.Engine.csproj" />
+  </ItemGroup>
+
+  <!-- Ship the built-in skills next to the executable. -->
+  <ItemGroup>
+    <None Include="..\..\skills\**\*" LinkBase="skills" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\tools\*.ps1" LinkBase="tools" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+hints:
+  - id: modernize
+    title: "Modernize a classic site"
+    what: "Moves a classic site to a modern communication or team site with modern pages."
+    why: "Modern themes, hubs, the app bar and modern web parts only work fully on modern sites and pages."
+    how:
+      - "Create the modern site and move the content that still matters."
+      - "Use SharePoint's page transformation tools for many pages."
+      - "Retire the classic site afterwards."
+    example: "Project 3's classic pages become modern pages in a new site in Finance Hub."
+    rules: [modern.classic-sites, modern.classic-theme]

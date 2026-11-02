@@ -1,0 +1,52 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build src/Hubwright.Cli -c Release
+      - run: dotnet build tests/Hubwright.Tests -c Release
+      - run: dotnet test tests/Hubwright.Tests -c Release --no-build
+      - name: Validate skills
+        run: dotnet src/Hubwright.Cli/bin/Release/net10.0/hubwright.dll skills validate
+        env:
+          HUBWRIGHT_HOME: ${{ runner.temp }}/hubwright
+
+  desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build src/Hubwright.Desktop -c Release -r win-x64
+
+  supply-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Fail on packages with known vulnerabilities
+        run: |
+          dotnet restore src/Hubwright.Cli
+          dotnet list src/Hubwright.Cli package --vulnerable --include-transitive | tee vulnerable.txt
+          ! grep -q "has the following vulnerable packages" vulnerable.txt
+      - name: Review new dependencies (pull requests)
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4

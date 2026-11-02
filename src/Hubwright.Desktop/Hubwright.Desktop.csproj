@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Hubwright Desktop: start from scratch, assess a tenant or import a snapshot; read findings with
+    their sources; design a blueprint; preview the theme and home page (WebView2); manage skills;
+    ask the AI. It works on the same ~/.hubwright folder as the CLI.
+
+    Build:  dotnet build src/Hubwright.Desktop -r win-x64
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <UseWinUI>true</UseWinUI>
+    <RootNamespace>Hubwright.Desktop</RootNamespace>
+    <AssemblyName>Hubwright.Desktop</AssemblyName>
+    <AssemblyTitle>Hubwright</AssemblyTitle>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets/Hubwright.ico</ApplicationIcon>
+    <Platforms>x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <NoWarn>$(NoWarn);CS0618;NETSDK1206;CA1001;CA2000;CA1515;CA1031;CA1822;CA2213;CA1859</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == '' and '$(Platform)' == 'ARM64'">
+    <RuntimeIdentifier>win-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == ''">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hubwright.Engine\Hubwright.Engine.csproj" />
+    <!-- Built alongside so CLI backends can start `hubwright mcp`. -->
+    <ProjectReference Include="..\Hubwright.Cli\Hubwright.Cli.csproj" ReferenceOutputAssembly="false" Private="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\skills\**\*" LinkBase="skills" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\tools\*.ps1" LinkBase="tools" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Colour icons: Fluent UI System Icons (MIT, Assets/Icons/LICENSE-fluentui-system-icons.txt), plus our own moon and sun. -->
+    <Content Include="Assets\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

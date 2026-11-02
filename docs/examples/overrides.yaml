@@ -1,0 +1,10 @@
+# Copy to ~/.hubwright/tenants/<tenant>/overrides.yaml.
+# Per-tenant changes to built-in rules, without forking a skill.
+rules:
+  lifecycle.inactive-site:
+    params: { inactiveDays: 365 }     # we review yearly, not every six months
+  hubs.single-hub:
+    disabled: true                    # one hub is a deliberate choice for us
+  content.stale-news:
+    severity: medium
+    params: { maxDays: 30 }

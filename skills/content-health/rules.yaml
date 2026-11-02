@@ -1,0 +1,79 @@
+# Rules for content-health. Facts: `hubwright facts tenant|site|hub`. Language: docs/rules-dsl.md.
+rules:
+  - id: content.lists-limit
+    title: "Near the lists-per-site limit"
+    scope: site
+    when: "content.lists + content.libraries >= $warnAt"
+    severity: high
+    basis: documented
+    params: { warnAt: 1800 }
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "2,000 lists and libraries combined per site collection."
+    reviewed: 2026-10-27
+    message: "{title} has {content.lists} lists and {content.libraries} libraries."
+    fix: "Split the site by audience or purpose."
+
+  - id: content.path-length
+    title: "Paths near the 400-character limit"
+    scope: site
+    when: "content.maxPathLength >= $warnAt"
+    severity: medium
+    basis: documented
+    params: { warnAt: 350 }
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "can't contain more than 400 characters"
+    reviewed: 2026-10-27
+    message: "{title} has a path {content.maxPathLength} characters long."
+    fix: "Shorten folder names and flatten folders."
+
+  - id: content.sync-size
+    title: "Library too big to sync well"
+    scope: site
+    when: "content.files > 300000"
+    severity: low
+    basis: documented
+    source: https://learn.microsoft.com/en-us/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits
+    quote: "For optimum performance, we recommend syncing no more than 300,000 files in a single OneDrive or team site library."
+    reviewed: 2026-10-27
+    message: "{title} has {content.files} files."
+    fix: "Split the library, or ask people to use shortcuts rather than syncing all of it."
+
+  - id: content.stale-news
+    title: "No recent news on a hub or the home site"
+    scope: site
+    filter: "isHub or isHomeSite"
+    when: "daysSinceNews > $maxDays"
+    severity: low
+    basis: heuristic
+    params: { maxDays: 60 }
+    message: "{title}: last news {daysSinceNews} days ago."
+    fix: "Agree a news rhythm with the hub owners."
+
+  - id: content.classic-pages
+    title: "Classic pages"
+    scope: site
+    when: "content.classicPages > 0"
+    severity: low
+    basis: heuristic
+    message: "{title} has {content.classicPages} classic page(s)."
+    fix: "Modernise them with the PnP page transformation tools."
+
+  - id: content.versioning-off
+    title: "Libraries without versioning"
+    scope: site
+    when: "content.librariesWithoutVersioning > 0"
+    severity: medium
+    basis: heuristic
+    message: "{title} has {content.librariesWithoutVersioning} library(ies) without versioning."
+    fix: "Turn on major versions in each library's settings."
+
+  - id: content.top-of-page
+    title: "Put the most important information at the top of each page"
+    kind: advisory
+    scope: site
+    severity: info
+    basis: documented
+    source: https://learn.microsoft.com/en-us/sharepoint/information-architecture-modern-experience
+    quote: "Make sure that you put the most important information – the information that your readers must have for your communication to be successful – at the top of the page."
+    reviewed: 2026-10-27
+    fix: "Review key pages: summary first, sections and headings, details below."
